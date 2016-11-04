@@ -57,3 +57,6 @@ Sample external links:
 <iron-ajax url="https://player.vimeo.com/video/113585297/config?token=efc8e0f1d6018066b758519bcb307208338c47ca" last-response="{{data}}" auto></iron-ajax>
 
 <template><div>{{data.request.files.progressive.url}}</div></template>
+
+
+The ajax to videos config cdn progressive links https://player.vimeo.com/video/169325478/config?token=efc8e0f1d6018066b758519bcb307208338c47ca
