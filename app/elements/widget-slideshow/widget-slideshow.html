@@ -1,0 +1,257 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="widget-slideshow">
+
+	<template>
+		<style include='shared-styles'></style>
+		<style>
+			:host {
+				box-sizing: border-box;
+				color: var(--medium-color);
+				padding: 0 1.2rem 0 1.2rem;
+				display: block;
+			}
+
+
+			header {
+				display: flex;
+				align-items: center;
+				font-size: 1.8rem;
+				padding: 2.4rem 0 2.4rem 0;
+			}
+
+			/*i {
+				background-color: rgba(255, 0, 0, .8);
+				font-weight: 900;
+				color: var(--lighter-color);
+				position: relative;
+				font-size: 1rem;
+				line-height: 1.2rem;
+				padding: .1rem .6rem .1rem .6rem;
+				box-sizing: border-box;
+				margin-right: 2.4rem;
+				display: inline-block;
+				text-align: center;
+			}*/
+
+			i:after {
+				content: '';
+				position: absolute;
+				left: 100%;
+				top: 0;
+				width: 0;
+				height: 0;
+				border-top: .7em solid transparent;
+				border-bottom: .7em solid transparent;
+				border-left: .7em solid rgba(255, 0, 0, .8);
+			}
+
+			hr {
+				margin-bottom: 1.2rem;
+			}
+
+			menu {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0;
+				margin: 0;
+				padding: 2.4rem;
+			}
+
+			button {
+				border: 0;
+				outline: 0;
+				padding: 0;
+				background: none;
+				padding: 0;
+				padding: .6rem;
+				font-size: 0;
+				line-height: 1;
+			}
+
+			button span {
+				width: 1.2rem;
+				line-height: 1;
+				height: 1.2rem;
+				border-radius: 50%;
+				display: inline-block;
+				background-color: var(--darkest-color);
+				pointer-events: none;
+			}
+
+			header span {
+				font-weight: 100;
+			}
+
+			header span:not(:first-child):not(:empty):before {
+				content: '|';
+				margin-right: 1.25rem;
+				margin-left: 1.25rem;
+			}
+
+			b {
+				font-weight: 700;
+				text-transform: uppercase;
+				color: white;
+			}
+
+
+			button:hover span {
+				background-color: var(--darker-color);
+			}
+
+			button.active span {
+				background-color: var(--light-color);
+			}
+
+			iron-image {
+				width: 100%;
+				/*outline: 1px solid;*/
+				/*height: calc(1280px*var(--aspect-ratio));*/
+				background-color: black;
+				display: block;
+				cursor: pointer;
+				transition: opacity .3s ease-in-out;
+				opacity: .8;
+			}
+
+			iron-image:before {
+				content: "";
+				display: block;
+				margin-top: calc(100%*var(--aspect-ratio));
+			}
+
+			:host:hover iron-image {
+				opacity: 1;
+			}
+
+			@media screen and (max-width: 640px) {
+				:host {
+					padding: 0 .6rem 0 .6rem;
+				}
+				header {
+					padding: 1.2rem 0 1.2rem 0;
+				}
+				menu {
+					padding: 1.2rem;
+				}
+			}
+		</style>
+		<iron-ajax url="{{src}}" last-response="{{data}}" auto></iron-ajax>
+		<!--<iron-ajax url="https://vimeo.com/api/v2/album/3674768/videos.json" last-response="{{data}}" auto></iron-ajax>-->
+		<!--<iron-ajax url="https://vimeo.com/api/v2/4487625/videos.json" last-response="{{data}}" auto></iron-ajax>-->
+
+
+		<template is="dom-repeat" items="{{item}}">
+			<header>
+				<b>{{item.title}}</b>
+				<span>{{trim(item.description)}}</span>
+			</header>
+			<!--<hr>-->
+			<iron-image sizing="cover" preload fade src="{{computeImages(item.thumbnail_large)}}" on-click="clickHandler"></iron-image>
+		</template>
+
+		<menu>
+			<template is="dom-repeat" items="{{computeCollection(data)}}">
+				<button on-click="select" class$="{{computeActiveState(index)}}"><span></span></button>
+			</template>
+		</menu>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'widget-slideshow',
+			properties: {
+				src: {
+						type: String,
+						notify: true,
+					},
+				items: {
+					type: Array,
+					notify: true,
+					value: [],
+					observer: 'ready'
+				},
+				item: {
+					type: Object,
+					notify: true,
+					value: [{
+						title: 'title',
+						tags: '',
+						uploadDate: '',
+						thumbnailLarge: ''
+					}]
+				}
+			},
+			computeImages: function(image) {
+        		return image.replace('_640','_2500');
+			},
+			computeActiveState: function(index) {
+				console.log(index);
+        		return index === 0 ? 'active' : '';
+			},
+			computeTags: function(tags) {
+				return tags.split(', ').splice(0, 1);
+			},
+			computeCollection: function(collection) {
+				// this.items = collection.splice(0, 3);
+				this.items = collection;
+				return this.items;
+			},
+			selectCollection: function(collection) {
+				return collection.splice(1, 1);
+			},
+			computeDate: function(date) {
+				return date.split('-')[0];
+			},
+			ready: function() {
+				console.log('ready');
+				this.item = [this.items[0]];
+			},
+			select: function(e) {
+				var model = e.model;
+				// e.target.classList.add('completed');
+				$(e.target).addClass('active').siblings().removeClass('active');
+				this.item = [model.item];
+			},
+			trim: function (desc) {
+				return desc.split('<')[0];
+			},
+			clickHandler: function (e) {
+				e.stopPropagation();
+				var lightBox = $('light-box');
+				lightBox.attr('video', e.model.get('item.id'));
+				lightBox.attr('video-title', e.model.get('item.title'));
+				lightBox.attr('video-description', this.trim(e.model.get('item.description')));
+				console.log(e.model.get('item.tags'));
+				if($.inArray('sd', e.model.get('item.tags').split(', ')) > -1) {
+					lightBox.attr('video-quality', 'sd');
+				} else {
+					lightBox.attr('video-quality', 'hd');
+				}
+				app.playButton.toggle('click');
+				lightBox.children('.dim-screen').on('mousedown', function () {
+					e.stopPropagation();
+					lightBox.removeAttr('video video-title video-description video-date video-quality');
+					// lightBox.removeAttr('iron-image');
+					return false;
+					// app.playButton.toggle('click');
+				});
+				return false;
+			}
+		});
+
+
+	</script>
+
+</dom-module>

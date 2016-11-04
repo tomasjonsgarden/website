@@ -1,0 +1,123 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="widget-contact">
+	<template>
+		<style include='shared-styles'></style>
+		<style>
+			:host {
+				display: block;
+				padding: 1.2rem;
+			}
+
+			section {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: space-between;
+				color: var(--darker-color);
+			}
+
+			h3 {
+				font-style: normal;
+				font-weight: 300;
+			}
+
+			footer {
+
+				padding-top: 13px;
+				padding-bottom: 20px;
+				margin-top: 20px;
+				margin-bottom: 20px;
+				font-size: var(--small-size);
+			}
+
+			address {
+				display: flex;
+				flex-direction: column;
+			}
+
+			address span {
+				font-weight: 600;
+				color: var(--medium-color);
+				font-style: normal;
+				margin-bottom: 1rem;
+			}
+
+			a {
+				color: inherit;
+				font-style: normal;
+				margin-bottom: 1rem;
+				text-decoration: none;
+			}
+
+			a:hover {
+				text-decoration: underline;
+
+			}
+
+			@media screen and (max-width: 1280px) {
+				address {
+					flex-basis: 50%;
+					margin-bottom: 4rem;
+				}
+			}
+
+			@media screen and (max-width: 640px) {
+				:host {
+					padding: .6rem;
+				}
+				address {
+					flex-basis: 100%;
+					margin-bottom: 4rem;
+				}
+			}
+		</style>
+		<footer>
+			<nav>
+				<section>
+					<address>
+						<h3>Contact</h3>
+						<span>Tomas Jonsgården</span>
+						<a href="mailto:tomas@tomasjonsgården.com">tomas@tomasjonsgården.com</a>
+					</address>
+					<address>
+						<h3>UK</h3>
+						<span>Mathew Brown</span>
+
+						<a href="www.knucklehead.co.uk">www.knucklehead.co.uk</a>
+						<a href="mailto:matthew@knucklehead.co.uk">matthew@knucklehead.co.uk</a>
+					</address>
+					<address>
+						<h3>US</h3>
+						<span>Dave Morrison</span>
+						<a href="www.resetcontent.com">www.resetcontent.com</a>
+						<a href="mailto:dave@resetcontent.com">dave@resetcontent.com</a>
+					</address>
+					<address>
+						<h3>Scandinavia</h3>
+						<span>Magnus Åkerstedt</span>
+						<a href="www.baconsth.com">www.baconsth.com</a>
+						<a href="mailto:magnus@baconsth.com">magnus@baconsth.com</a>
+					</address>
+				</section>
+			</nav>
+		</footer>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'widget-contact',
+
+		});
+	</script>
+
+</dom-module>

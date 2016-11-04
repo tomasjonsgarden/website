@@ -1,0 +1,170 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="widget-header">
+
+	<template>
+		<style include='shared-styles'></style>
+		<style>
+			:host {
+				display: flex;
+				align-items: center;
+				/*padding: 2.4rem 1.2rem 2.4rem 1.2rem;
+				margin-bottom: 1.2rem;*/
+				padding: 4.8rem 1.2rem 3.6rem 1.2rem;
+				margin-bottom: 2.4rem;
+			}
+
+			a {
+				color: inherit;
+				font-weight: 400;
+				text-decoration: none;
+				text-transform: uppercase;
+			}
+
+			header component-svg-icon {
+				display: none;
+				background: none;
+				border: 0;
+				padding: 0;
+				outline: 0;
+			}
+
+			component-svg-icon svg {
+				fill: red;
+			}
+
+			nav a:not(:last-child):after {
+				content: '|';
+				font-style: normal;
+				margin-right: 1.6rem;
+				margin-left: 1.6rem;
+			}
+
+			nav a:after {
+				font-weight: 400;
+			}
+
+			nav:first-of-type {
+				flex-grow: 1;
+			}
+
+			.app-title {
+				color: var(--accent-color);
+				font-weight: 600;
+				margin-right: 40px;
+			}
+
+			.is-selected:not(.app-title) {
+				font-weight: 600;
+				font-style: italic;
+				color: white;
+			}
+
+			.is-selected:after {
+				font-weight: 400;
+				font-style: normal;
+				color: var(--medium-color);
+			}
+
+			@media screen and (max-width: 1024px) {
+				:host {
+					padding: 3.6rem 1.2rem 3.6rem 1.2rem;
+					margin-bottom: 1.2rem;
+				}
+				nav a:not(:last-child):after {
+					content: '|';
+					font-style: normal;
+					margin-right: .3rem;
+					margin-left: .6rem;
+				}
+			}
+
+			@media screen and (max-width: 768px) {
+				:host {
+					align-items: flex-start;
+					flex-direction: column;
+					padding: 3.6rem 1.2rem 3.6rem 1.2rem;
+				}
+				header {
+					display: flex;
+					width: 100%;
+					justify-content: space-between;
+					align-items: center;
+				}
+				header component-svg-icon {
+					display: block;
+				}
+				nav {
+					display: flex;
+					flex-direction: column;
+					margin-top: 2.4rem;
+					color: var(--accent-color);
+					position: absolute;
+					visibility: hidden;
+				}
+				:host.is-active nav {
+					visibility: visible;
+					position: static;
+				}
+				nav a:after {
+					display: none;
+				}
+			}
+
+			@media screen and (max-width: 640px) {
+				:host {
+					padding: 2.4rem .6rem 2.4rem .6rem;
+					margin-bottom: 1.2rem;
+				}
+				nav a:not(:last-child):after {
+					content: '|';
+					font-style: normal;
+					margin-right: .3rem;
+					margin-left: .6rem;
+				}
+			}
+		</style>
+		<header>
+			<a class="app-title" href="/">Tomas Jonsgården</a>
+			<component-svg-icon on-click="handleClick"></component-svg-icon>
+		</header>
+		<nav>
+			<a href="/commercial">Commercial</a>
+			<a href="/narrative">Narrative</a>
+			<a href="/photography">Photography</a>
+		</nav>
+		<nav>
+			<a href="/about">About</a>
+			<a href="/contact">Contact</a>
+		</nav>
+
+	</template>
+
+	<script>
+		Polymer({
+			is: 'widget-header',
+			handleClick: function(e){
+				e.stopPropagation();
+				var that = this;
+				$(this).toggleClass('is-active');
+				$('body').on('click', function(){
+					e.stopPropagation(e);
+					app.menuButton.toggle('click');
+					$(that).removeClass('is-active');
+					$(this).off('click');
+				});
+				return false;
+			}
+		});
+	</script>
+
+</dom-module>

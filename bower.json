@@ -7,7 +7,13 @@
     "paper-elements": "PolymerElements/paper-elements#^1.0.1",
     "platinum-elements": "PolymerElements/platinum-elements#^1.1.0",
     "neon-elements": "PolymerElements/neon-elements#^1.0.0",
-    "page": "visionmedia/page.js#~1.6.3"
+    "page": "visionmedia/page.js#~1.6.3",
+    "paper-radio-group": "PolymerElements/paper-radio-group#~1.0.6",
+    "iron-menu-behavior": "PolymerElements/iron-menu-behavior#~1.0.5",
+    "paper-spinner": "PolymerElements/paper-spinner#~1.0.2",
+    "paper-card": "PolymerElements/paper-card#~1.0.7",
+    "jquery": "~2.1.4",
+    "Snap.svg": "snap.svg#~0.4.1"
   },
   "devDependencies": {
     "web-component-tester": "*",

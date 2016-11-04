@@ -1,0 +1,377 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel='import' href='../../bower_components/polymer/polymer.html'>
+
+<dom-module id='light-box'>
+	<template>
+		<style include='shared-styles'></style>
+		<style>
+			:host {
+				display: block;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				position: fixed;
+				z-index: 1000;
+			}
+
+			video {
+				width: 100%;
+				height: 100%;
+				display: block;
+				margin: auto;
+				z-index: 2;
+			}
+
+			iron-image {
+				width: 100%;
+				height: 100%;
+				display: block;
+				margin: auto;
+				z-index: 2;
+			}
+
+			iron-image:before {
+				margin-top: 100%;
+			}
+
+			iron-image {
+				width: 100%;
+				/*outline: 1px solid;*/
+				/*height: calc(1280px*var(--aspect-ratio));*/
+				background-color: black;
+				display: block;
+				cursor: pointer;
+				transition: opacity .3s ease-in-out;
+				/*opacity: .8;*/
+			}
+
+			iron-image:before {
+				content: "";
+				display: block;
+				margin-top: calc(100%*var(--aspect-ratio));
+			}
+
+			.dim-screen {
+				position: relative;
+				position: absolute;
+				background-color: rgba(25, 0, 0, 0.9);
+				width: 100%;
+				height: 100%;
+				top: 0;
+				padding: 1.2rem;
+				box-sizing: border-box;
+				left: 0;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				z-index: 100;
+			}
+
+			.dim {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				z-index: 100;
+			}
+
+			header {
+				align-self: flex-start;
+			}
+
+			.video-player {
+				/*background: black;*/
+				position: relative;
+				width: 100%;
+				max-width: 86rem;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			.video-controls {
+				position: absolute;
+				padding: 0;
+				left: 0;
+				top: 100%;
+				width: 100%;
+				bottom: 0;
+				opacity: .3;
+				display: flex;
+				height: 1rem;
+				flex-direction: row;
+				align-items: center;
+			}
+
+			.video-scrubber,
+			.video-progress {
+				cursor: pointer;
+			}
+
+			.video-scrubber {
+				width: 100%;
+				height: 100%;
+			}
+
+			.si-icons {
+				height: 100%;
+				width: 7%;
+				fill: red;
+			}
+
+			.video-progress {
+				width: 0;
+				height: 100%;
+				background-color: darkred;
+				transition: background-color 1s, width .4s;
+			}
+
+			.video-player:hover .video-controls .video-progress {
+				background-color: red;
+				height: 100%;
+			}
+
+			.play-pause:after {
+				content: 'Play';
+			}
+
+			.play-pause.pause:after {
+				content: 'Pause';
+			}
+
+			play-svg-icon {
+				transition: opacity .4s;
+				transition-delay: 1s;
+				opacity: 0;
+			}
+
+			.video-player:hover play-svg-icon {
+				transition-delay: .3s;
+				opacity: .8;
+			}
+
+			:host:not([iron-image]):not([video]) {
+				display: none;
+			}
+
+			:host[iron-image] video {
+				display: none;
+			}
+
+			:host[iron-image] .video-controls {
+				display: none;
+			}
+
+			:host[iron-image] play-svg-icon {
+				display: none;
+			}
+
+			:host[video] iron-image {
+				display: none;
+			}
+
+		</style>
+
+		<div class="dim-screen">
+			<div class="dim">
+				<div class="video-player">
+					<header class="style-scope widget-slideshow">
+						<b class="style-scope widget-slideshow">[[videoTitle]][[ironImageTitle]]</b>
+						<span class="style-scope widget-slideshow">[[videoDescription]][[ironImageDescription]]</span>
+						<template is="dom-repeat" class="style-scope widget-slideshow"></template>
+					</header>
+					<play-svg-icon on-click="handleClick"></play-svg-icon>
+					<video class="play-pause" src="[[computedSrc(video, videoQuality)]]" autoplay></video>
+					<iron-image sizing="{{ironImageOrientation}}" preload fade src="[[ironImageSrc]]"></iron-image>
+					<div class="video-controls">
+						<div class="video-scrubber">
+							<div class="video-progress">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+
+		</script>
+	</template>
+	<script>
+		(function () {
+
+				Polymer({
+					is: 'light-box',
+
+					properties: {
+						  video: {
+						    type: Object,
+							notify: true
+						  },
+						  ironImage: {
+						    type: Object,
+							notify: true
+						  }
+					},
+					computedSrc: function (video, videoQuality) {
+						console.log(video);
+						if (video) {
+							app.playButton.toggle('click');
+							return 'https://player.vimeo.com/external/' + video + '.' + videoQuality + '.mp4?s=';
+						} else {
+							app.playButton.toggle('click');
+							return false;
+						}
+					},
+					attached: function () {
+						$.fn.html5video = function () {
+							var $wrapper = $(this),
+								$video = $('video', this),
+								$controls = $('.video-controls', $wrapper),
+								$playPause = $('.play-pause', $wrapper),
+								$current = $('.video-current', $wrapper),
+								$scrubber = $('.video-scrubber', $wrapper),
+								$progress = $('.video-progress', $wrapper),
+								$duration = $('.video-duration', $wrapper);
+
+							/*  --------------------------------------------------------
+								No-JS Friendly
+								-------------------------------------------------------- */
+							// remove default controls
+							$video.removeAttr('controls');
+
+							// show custom controls
+							$controls.show();
+
+
+							/*  --------------------------------------------------------
+								Play/Pause
+								-------------------------------------------------------- */
+							$playPause.on('mousedown', function (e) {
+								e.stopPropagation();
+								//   app.playButton.toggle('click');
+								var $this = $(this),
+									video = $video[0];
+
+								if (video.paused) {
+									app.playButton.toggle('click');
+									video.play();
+									$this.addClass('pause');
+								} else {
+									app.playButton.toggle('click');
+									video.pause();
+									$this.removeClass('pause');
+								}
+							});
+
+
+							/*  --------------------------------------------------------
+								Update Time
+								-------------------------------------------------------- */
+							$video.on('timeupdate', function () {
+								onTrackedVideoFrame(this.currentTime, this.duration);
+							});
+
+							function onTrackedVideoFrame(currentTime, duration) {
+
+								var percent = currentTime / duration;
+
+								// update current time
+								$current.text(formatTime(currentTime));
+								$duration.text(formatTime(duration));
+
+								// update progress bar
+								$progress.width((percent * 100) + '%');
+							}
+
+
+							/*  --------------------------------------------------------
+								Scrubber/Progress Bar
+								-------------------------------------------------------- */
+							var timeDrag = false; // check for drag event
+
+							$scrubber.on('mousedown', function (e) {
+								e.stopPropagation();
+								timeDrag = true;
+								updateScrubber(e.pageX);
+							});
+
+							$(document).on('mouseup', function (e) {
+								e.stopPropagation();
+								if (timeDrag) {
+									timeDrag = false;
+									updateScrubber(e.pageX);
+								}
+							});
+
+							$(document).on('mousemove', function (e) {
+								e.stopPropagation();
+								if (timeDrag) {
+									updateScrubber(e.pageX);
+								}
+							});
+
+							function updateScrubber(x) {
+
+								var maxduration = $video[0].duration,
+									position = x - $scrubber.offset().left,
+									percent = 100 * position / $scrubber.width();
+
+								if (percent > 100) {
+									percent = 100;
+								}
+								if (percent < 0) {
+									percent = 0;
+								}
+
+								// update progress bar
+								$progress.width((percent) + '%');
+
+								// update video time to reflect change
+								$video[0].currentTime = maxduration * percent / 100;
+							}
+
+
+							/*  --------------------------------------------------------
+								Helper Functions
+								-------------------------------------------------------- */
+							function formatTime(seconds) {
+
+								var minutes = Math.floor(seconds / 60);
+								seconds = Math.floor(seconds % 60);
+
+								seconds = (seconds >= 10) ? seconds : '0' + seconds;
+								minutes = (minutes >= 10) ? minutes : minutes;
+
+								return minutes + ':' + seconds;
+							}
+
+							// maybe trigger share buttons when complete?
+							$video.bind('ended', function () {
+								// do cool shizz here
+							});
+
+						};
+
+						$('.video-player').html5video();
+
+						var el = document.querySelectorAll('.si-icons-default > .si-icon-play')[0];
+						app.playButton = new svgIcon(el, svgIconConfig);
+					}
+				});
+			})();
+	</script>
+
+</dom-module>

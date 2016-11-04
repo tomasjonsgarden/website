@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+	<link rel="import" href="bower_components/polymer/polymer.html">
+	<link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+  <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
+  <link rel="import" href="bower_components/paper-progress/paper-progress.html">
+  <link rel="import" href="bower_components/paper-styles/paper-styles.html">
+  <link rel="import" href="bower_components/google-castable-video/google-castable-video.html">
+  <!--bower install --save PolymerElements/paper-drawer-panel
+  bower install --save PolymerElements/paper-fab
+  bower install --save PolymerElements/paper-header-panel
+  bower install --save PolymerElements/paper-icon-button
+  bower install --save PolymerElements/paper-item
+  bower install --save PolymerElements/paper-material
+  bower install --save PolymerElements/paper-menu
+  bower install --save PolymerElements/paper-menu-button
+  bower install --save PolymerElements/paper-ripple
+  bower install --save PolymerElements/paper-scroll-header-panel
+  bower install --save PolymerElements/paper-spinner
+  bower install --save PolymerElements/paper-styles-->
+
+</head>
+
+<body class="fullbleed layout horizontal wrap center-justified">
+	<paper-progress class="flex-auto" indeterminate></paper-progress>
+<google-castable-video></google-castable-video>
+  <template id="t" is="dom-bind">
+<!--https://vimeo.com/api/v2/4487625/info.json?callback=-->
+<!--https://vimeo.com/api/v2/4487625/videos.json?callback=-->
+<!--https://vimeo.com/api/v2/4487625/albums.json?callback=-->
+    <iron-ajax url="http://jsonplaceholder.typicode.com/posts" last-response="{{data}}" auto></iron-ajax>
+
+    <template is="dom-repeat" items="{{data}}">
+        <h1>{{item.title}}</h1>
+		<p>{{item.body}}</p>
+    </template>
+<style>
+paper-progress {
+  --paper-progress-active-color: #e91e63;
+}</style>
+  </template>
+
+</body>
+<script>
+//   var t = document.querySelector('#t');
+//
+//   t.addEventListener('dom-change', function() {
+//
+//   });
+</script>
+
+</html>

@@ -1,0 +1,25 @@
+<link rel="import"
+	href="bower_components/polymer/polymer.html">
+
+<dom-module id="name-tag">
+	<template  is="dom-bind">
+		<iron-ajax auto
+			url="http://jsonplaceholder.typicode.com/posts"
+			handle-as="json"
+			last-response="{{ajaxResponse}}"></iron-ajax>
+
+		<template is="dom-repeat" items="{{ajaxResponse}}">
+			<div>
+				<p>{{item.title}}</p>
+			</div>
+		</template>
+	</template>
+	<script>
+		Polymer({
+			is: "name-tag",
+			ready: function() {
+
+			}
+		});
+	</script>
+</dom-module>

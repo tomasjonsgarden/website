@@ -1,0 +1,279 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="widget-photos">
+	<template>
+		<style include='shared-styles'></style>
+		<style>
+			:host {
+				@apply(--layout-horizontal);
+				@apply(--layout-wrap);
+				box-sizing: border-box;
+				padding-top: 0;
+				padding-bottom: 2.4rem;
+				font-size: var(--medium-size);
+			}
+
+			div {
+				flex-basis: calc(100%/3);
+				color: grey;
+				background-color: black;
+				box-sizing: border-box;
+				display: flex;
+				flex-direction: column;
+				align-items: left;
+				padding: 0 1.2rem 0 1.2rem;
+			}
+
+			:host[orientation="portrait"] div {
+				flex-basis: calc(100%/4);
+				color: grey;
+				background-color: black;
+				box-sizing: border-box;
+				display: flex;
+				flex-direction: column;
+				align-items: left;
+				padding: 0 1.2rem 0 1.2rem;
+			}
+
+			div p {
+				cursor: pointer;
+				font-size: 1.8rem;
+				display: flex;
+				flex-direction: row;
+			}
+
+			span:not(:first-child):not(:empty):before {
+				content: '|';
+				margin-right: 10px;
+				margin-left: 10px;
+			}
+
+			span {
+				font-weight: 100;
+			}
+
+			span:not(:last-child) {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			div:nth-of-type(4) {
+				display: none;
+			}
+
+			span:first-child {
+				color: white;
+				/*font-style: italic;*/
+				font-weight: 600;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			:host[orientation="landscape"] iron-image {
+				width: 100%;
+				background-size: 140% !important;
+				background-color: black;
+				cursor: pointer;
+				transition: opacity .3s ease-in-out;
+			}
+
+			:host[orientation="landscape"] iron-image:before {
+				content: "";
+				display: block;
+				margin-top: calc(100%*var(--aspect-ratio));
+			}
+
+			:host[orientation="portrait"] iron-image {
+				width: 100%;
+				background-size: 100% !important;
+				background-color: black;
+				cursor: pointer;
+				transition: opacity .3s ease-in-out;
+			}
+
+			:host[orientation="portrait"] iron-image:before {
+				content: "";
+				display: block;
+				margin-top: calc(200%*var(--aspect-ratio));
+			}
+
+			div:hover iron-image {
+				opacity: .7;
+			}
+
+			@media screen and (max-width: 768px) {
+				div {
+					flex-basis: calc(100%/2);
+					color: grey;
+					background-color: black;
+					box-sizing: border-box;
+					display: flex;
+					flex-direction: column;
+					/*padding: 0 1.2rem 0 1.2rem;*/
+				}
+				:host[orientation="portrait"] div {
+					flex-basis: calc(100%/3);
+					color: grey;
+					background-color: black;
+					box-sizing: border-box;
+					display: flex;
+					flex-direction: column;
+					align-items: left;
+					padding: 0 1.2rem 0 1.2rem;
+				}
+				/*div:nth-child(2n+1) {
+					padding-left: 0;
+				}
+				div:nth-child(2n) {
+					padding-right: 0;
+				}*/
+			}
+
+			@media screen and (max-width: 640px) {
+				div {
+					padding: 0 .6rem 0 .6rem;
+				}
+				div p {
+					margin-top: 1.2rem;
+					margin-bottom: 1.2rem;
+				}
+			}
+
+			@media screen and (min-width: 0) and (max-width: 480px) {
+				div {
+					flex-basis: calc(100%);
+					color: grey;
+					background-color: black;
+					box-sizing: border-box;
+					display: flex;
+					flex-direction: column;
+					/*padding: 0;*/
+				}
+				:host[orientation="portrait"] div {
+					flex-basis: calc(100%/2);
+					color: grey;
+					background-color: black;
+					box-sizing: border-box;
+					display: flex;
+					flex-direction: column;
+					align-items: left;
+					padding: 0 1.2rem 0 1.2rem;
+				}
+			}
+		</style>
+		<!--<iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>-->
+		<iron-ajax url="{{src}}" on-error="handleError" last-response="{{data}}" auto></iron-ajax>
+
+		<template is="dom-repeat" items="{{computeData(data)}}" filter="_orientation">
+			<div>
+				<p>
+					<span>{{item.title.$t}}</span>
+					<!--<span>{{item.media$group.media$content.0.width}}</span>
+					<span>{{item.media$group.media$content.0.height}}</span>-->
+				</p>
+				<iron-image sizing="cover" preload fade src="{{computeImages(item.media$group.media$thumbnail.0.url)}}" on-click="clickHandler"></iron-image>
+			</div>
+		</template>
+	</template>
+	<script>
+		(function () {
+			'use strict';
+
+			Polymer({
+				is: 'widget-photos',
+				properties: {
+					orientation: {
+						type: String
+					},
+					route: {
+						type: String,
+						notify: true,
+					},
+					src: {
+						type: String,
+						notify: true,
+					},
+					items: {
+						type: Array,
+						notify: true,
+					}
+				},
+				handleError: function (data) {
+					console.log('error: ', data);
+				},
+				_filter: function (val) {
+					return function () {
+						// filter="{{_filter(data)}}"
+						return console.log(val);
+					};
+				},
+				_orientation: function(item) {
+					if(this.orientation && this.orientation === 'portrait'){
+						return item && (item.media$group.media$content[0].width < item.media$group.media$content[0].height);
+					} else if (this.orientation && this.orientation === 'landscape'){
+						return item && (item.media$group.media$content[0].width >= item.media$group.media$content[0].height);
+					} else {
+						return item;
+					}
+				},
+				computeImages: function (image) {
+					return image.replace('s72', 's900');
+				},
+				computeData: function (data) {
+					console.log(this.route);
+					console.log(data.feed.entry);
+					// data-route="photography"
+					return data.feed.entry;
+				},
+				computeTags: function (tags) {
+					console.log(tags.split(' ').splice(0, 1));
+					return tags.split(' ').splice(0, 1);
+				},
+				computeDate: function (date) {
+					var d = new Date(date);
+					return d.getFullYear();
+				},
+				ready: function () {
+					this.items = [];
+				},
+				clickHandler: function (e) {
+					e.stopPropagation();
+					console.log(e.model.get('item.title.$t'));
+					var lightBox = $('light-box');
+					lightBox.attr('iron-image', e.model.get('item.title.$t'));
+					lightBox.attr('iron-image-title', e.model.get('item.title.$t'));
+					lightBox.attr('iron-image-src', e.model.get('item.media$group.media$thumbnail')[2].url.replace('288','2500'));
+					lightBox.attr('iron-image-orientation', 'contain');
+					// this.orientation
+					if(this.orientation === 'landscape') {
+						lightBox.attr('iron-image-orientation', 'cover');
+					} else {
+						lightBox.attr('iron-image-orientation', 'contain');
+					}
+
+					app.playButton.toggle('click');
+					lightBox.children('.dim-screen').on('mousedown', function () {
+						e.stopPropagation();
+						lightBox.removeAttr('iron-image iron-image-title iron-image-src');
+						// lightBox.removeAttr('video');
+						return false;
+						// app.playButton.toggle('click');
+					});
+					return false;
+				}
+			});
+})();
+	</script>
+
+</dom-module>

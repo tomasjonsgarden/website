@@ -1,0 +1,59 @@
+<link rel='import' href='../../bower_components/polymer/polymer.html'>
+
+<dom-module id='component-svg-icon'>
+	<template>
+		<style include='shared-styles'></style>
+		<style>
+			:host {
+				display: inline-block;
+				font-size: 0;
+				line-height: 0;
+				/*pointer-events: none;*/
+			}
+
+			.si-icons span {
+				display: inline-block;
+				width: 2.4rem;
+				height: 2.4rem;
+				/*margin: 40px 30px;*/
+				cursor: pointer;
+				background-repeat: no-repeat;
+				background-position: center center;
+			}
+
+			.si-icons-hover span {
+				width: 2.4rem;
+				height: 2.4rem;
+				/*margin: 50px 40px;*/
+			}
+		</style>
+
+		<section class="si-icons si-icons-default">
+			<span class="si-icon si-icon-hamburger-cross" data-icon-name="hamburgerCross"></span>
+		</section>
+	</template>
+
+
+	<script>
+		(function() {
+
+      Polymer({
+        is: 'component-svg-icon',
+
+        properties: {
+          greeting: {
+            type: String,
+            value: 'Welcome!',
+            notify: true
+          }
+        },
+		attached: function(){
+
+			var el = document.querySelectorAll( '.si-icons-default > .si-icon-hamburger-cross' )[0];
+			app.menuButton = new svgIcon( el, svgIconConfig );
+		}
+      });
+    })();
+	</script>
+
+</dom-module>

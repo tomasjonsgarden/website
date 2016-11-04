@@ -1,0 +1,17 @@
+<dom-module id="name-tag">
+	<template>
+		<iron-ajax auto
+			url="http://jsonplaceholder.typicode.com/posts"
+			handle-as="json"
+			last-response="{{ajaxResponse}}"></iron-ajax>
+
+		<template is="dom-repeat" items="[[ajaxResponse.items]]">
+			<div>
+				<p>[[item.title]]</p>
+			</div>
+		</template>
+	</template>
+
+
+
+</dom-module>

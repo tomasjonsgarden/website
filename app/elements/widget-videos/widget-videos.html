@@ -1,0 +1,201 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="widget-videos">
+	<template>
+		<style include='shared-styles'></style>
+		<style>
+			:host {
+				@apply(--layout-horizontal);
+				@apply(--layout-wrap);
+				box-sizing: border-box;
+				padding-top: 0;
+				padding-bottom: 2.4rem;
+				font-size: var(--medium-size);
+			}
+
+			:host:first-child {
+				padding-bottom: 0;
+			}
+
+			div {
+				flex-basis: calc(100%/3);
+				color: grey;
+				background-color: black;
+				box-sizing: border-box;
+				display: flex;
+				flex-direction: column;
+				align-items: left;
+				padding: 0 1.2rem 0 1.2rem;
+			}
+
+			div p {
+				cursor: pointer;
+				font-size: 1.8rem;
+				display: flex;
+				flex-direction: row;
+				width: calc(100% - 20px);
+				box-sizing: border-box;
+			}
+
+			span:not(:first-child):not(:empty):before {
+				content: '|';
+				margin-right: 10px;
+				margin-left: 10px;
+			}
+
+			span {
+				font-weight: 100;
+			}
+
+			span {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			span:first-child {
+				color: white;
+				/*font-style: italic;*/
+				font-weight: 600;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			:host iron-image {
+				width: 100%;
+				background-size: 140% !important;
+				background-color: black;
+				cursor: pointer;
+				transition: opacity .3s ease-in-out;
+			}
+
+			iron-image:before {
+				content: "";
+				display: block;
+				margin-top: calc(100%*var(--aspect-ratio));
+			}
+
+			div:hover iron-image {
+				opacity: .7;
+			}
+
+			@media screen and (max-width: 768px) {
+				div {
+					flex-basis: calc(100%/2);
+					color: grey;
+					background-color: black;
+					box-sizing: border-box;
+					display: flex;
+					flex-direction: column;
+					/*padding: 0 1.2rem 0 1.2rem;*/
+				}
+				/*div:nth-child(2n+1) {
+					padding-left: 0;
+				}
+				div:nth-child(2n) {
+					padding-right: 0;
+				}*/
+			}
+
+			@media screen and (max-width: 640px) {
+				div {
+					padding: 0 .6rem 0 .6rem;
+				}
+				div p {
+					margin-top: 1.2rem;
+					margin-bottom: 1.2rem;
+				}
+			}
+
+			@media screen and (min-width: 0) and (max-width: 480px) {
+				div {
+					flex-basis: calc(100%);
+					color: grey;
+					background-color: black;
+					box-sizing: border-box;
+					display: flex;
+					flex-direction: column;
+					/*padding: 0;*/
+				}
+			}
+		</style>
+
+		<!--<iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>-->
+		<iron-ajax url="{{src}}" last-response="{{data}}" auto></iron-ajax>
+		<template is="dom-repeat" items="{{data}}">
+			<div on-click="clickHandler">
+				<p>
+					<span>{{item.title}}</span>
+					<span>{{trim(item.description)}}</span>
+				</p>
+				<iron-image sizing="cover" preload fade src="{{computeImages(item.thumbnail_large)}}"></iron-image>
+			</div>
+		</template>
+	</template>
+	<script>
+		(function () {
+			'use strict';
+			Polymer({
+				is: 'widget-videos',
+				properties: {
+					src: {
+						type: String,
+						notify: true,
+					},
+					items: {
+						type: Array,
+						notify: true,
+					}
+				},
+				computeImages: function (image) {
+					return image.replace('_640', '_900');
+				},
+				trim: function (desc) {
+					return desc.split('<')[0];
+				},
+				computeTags: function (tags) {
+					return tags.split(', ').splice(0, 1);
+				},
+				computeDate: function (date) {
+					return date.split('-')[0];
+				},
+				ready: function () {
+					this.items = [];
+				},
+				clickHandler: function (e) {
+					e.stopPropagation();
+					var lightBox = $('light-box');
+					lightBox.attr('video', e.model.get('item.id'));
+					lightBox.attr('video-title', e.model.get('item.title'));
+					lightBox.attr('video-description', this.trim(e.model.get('item.description')));
+					console.log(e.model.get('item.tags'));
+					if($.inArray('sd', e.model.get('item.tags').split(', ')) > -1) {
+						lightBox.attr('video-quality', 'sd');
+					} else {
+						lightBox.attr('video-quality', 'hd');
+					}
+					app.playButton.toggle('click');
+					lightBox.children('.dim-screen').on('mousedown', function () {
+						e.stopPropagation();
+						lightBox.removeAttr('video video-title video-description video-date video-quality');
+						// lightBox.removeAttr('iron-image');
+						return false;
+						// app.playButton.toggle('click');
+					});
+					return false;
+				}
+			});
+		})();
+	</script>
+
+</dom-module>

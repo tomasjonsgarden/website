@@ -1,0 +1,63 @@
+<link rel='import' href='../../bower_components/polymer/polymer.html'>
+
+<dom-module id='play-svg-icon'>
+	<template>
+		<style include='shared-styles'></style>
+		<style>
+			:host {
+				display: block;
+				font-size: 0;
+				line-height: 0;
+				pointer-events: none;
+			}
+
+			.si-icons span {
+				display: inline-block;
+				cursor: pointer;
+				background-repeat: no-repeat;
+				background-position: center center;
+			}
+
+			.si-icons {
+				width: 8rem;
+				height: 8rem;
+				fill: red;
+				opacity: .4;
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				margin: auto;
+			}
+
+			.si-icons-hover span {
+				width: 2.4rem;
+				height: 2.4rem;
+			}
+		</style>
+
+		<section class="si-icons si-icons-default">
+			<span class="si-icon si-icon-play" data-icon-name="play"></span>
+		</section>
+	</template>
+
+	<script>
+		(function () {
+			Polymer({
+				is: 'play-svg-icon',
+				properties: {
+					greeting: {
+						type: String,
+						value: 'Welcome!',
+						notify: true
+					}
+				},
+				attached: function () {
+
+				}
+			});
+		})();
+	</script>
+
+</dom-module>
