@@ -10,7 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel='import' href='../../bower_components/polymer/polymer.html'>
 
 <dom-module id='light-box'>
-	<template>
+    <template>
 		<style include='shared-styles'></style>
 		<style>
 			:host {
@@ -192,186 +192,185 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						<b class="style-scope widget-slideshow">[[videoTitle]][[ironImageTitle]]</b>
 						<span class="style-scope widget-slideshow">[[videoDescription]][[ironImageDescription]]</span>
 						<template is="dom-repeat" class="style-scope widget-slideshow"></template>
-					</header>
-					<play-svg-icon on-click="handleClick"></play-svg-icon>
-					<video class="play-pause" src="[[computedSrc(video, videoQuality)]]" autoplay></video>
-					<iron-image sizing="{{ironImageOrientation}}" preload fade src="[[ironImageSrc]]"></iron-image>
-					<div class="video-controls">
-						<div class="video-scrubber">
-							<div class="video-progress">
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<script>
+    </header>
+    <play-svg-icon on-click="handleClick"></play-svg-icon>
+    <video class="play-pause" src="[[computedSrc(video)]]" autoplay></video>
+    <iron-image sizing="{{ironImageOrientation}}" preload fade src="[[ironImageSrc]]"></iron-image>
+    <div class="video-controls">
+        <div class="video-scrubber">
+            <div class="video-progress">
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <script>
+    </script>
+    </template>
+    <script>
+        (function() {
 
-		</script>
-	</template>
-	<script>
-		(function () {
+            Polymer({
+                is: 'light-box',
 
-				Polymer({
-					is: 'light-box',
+                properties: {
+                    video: {
+                        type: Object,
+                        notify: true
+                    },
+                    ironImage: {
+                        type: Object,
+                        notify: true
+                    }
+                },
+                computedSrc: function(video) {
+                    console.log(video);
+                    if (video) {
+                        app.playButton.toggle('click');
+                        return video;
+                    } else {
+                        app.playButton.toggle('click');
+                        return false;
+                    }
+                },
+                attached: function() {
+                    $.fn.html5video = function() {
+                        var $wrapper = $(this),
+                            $video = $('video', this),
+                            $controls = $('.video-controls', $wrapper),
+                            $playPause = $('.play-pause', $wrapper),
+                            $current = $('.video-current', $wrapper),
+                            $scrubber = $('.video-scrubber', $wrapper),
+                            $progress = $('.video-progress', $wrapper),
+                            $duration = $('.video-duration', $wrapper);
 
-					properties: {
-						  video: {
-						    type: Object,
-							notify: true
-						  },
-						  ironImage: {
-						    type: Object,
-							notify: true
-						  }
-					},
-					computedSrc: function (video, videoQuality) {
-						console.log(video);
-						if (video) {
-							app.playButton.toggle('click');
-							return 'https://player.vimeo.com/external/' + video + '.' + videoQuality + '.mp4?s=';
-						} else {
-							app.playButton.toggle('click');
-							return false;
-						}
-					},
-					attached: function () {
-						$.fn.html5video = function () {
-							var $wrapper = $(this),
-								$video = $('video', this),
-								$controls = $('.video-controls', $wrapper),
-								$playPause = $('.play-pause', $wrapper),
-								$current = $('.video-current', $wrapper),
-								$scrubber = $('.video-scrubber', $wrapper),
-								$progress = $('.video-progress', $wrapper),
-								$duration = $('.video-duration', $wrapper);
+                        /*  --------------------------------------------------------
+                        	No-JS Friendly
+                        	-------------------------------------------------------- */
+                        // remove default controls
+                        $video.removeAttr('controls');
 
-							/*  --------------------------------------------------------
-								No-JS Friendly
-								-------------------------------------------------------- */
-							// remove default controls
-							$video.removeAttr('controls');
-
-							// show custom controls
-							$controls.show();
-
-
-							/*  --------------------------------------------------------
-								Play/Pause
-								-------------------------------------------------------- */
-							$playPause.on('mousedown', function (e) {
-								e.stopPropagation();
-								//   app.playButton.toggle('click');
-								var $this = $(this),
-									video = $video[0];
-
-								if (video.paused) {
-									app.playButton.toggle('click');
-									video.play();
-									$this.addClass('pause');
-								} else {
-									app.playButton.toggle('click');
-									video.pause();
-									$this.removeClass('pause');
-								}
-							});
+                        // show custom controls
+                        $controls.show();
 
 
-							/*  --------------------------------------------------------
-								Update Time
-								-------------------------------------------------------- */
-							$video.on('timeupdate', function () {
-								onTrackedVideoFrame(this.currentTime, this.duration);
-							});
+                        /*  --------------------------------------------------------
+                        	Play/Pause
+                        	-------------------------------------------------------- */
+                        $playPause.on('mousedown', function(e) {
+                            e.stopPropagation();
+                            //   app.playButton.toggle('click');
+                            var $this = $(this),
+                                video = $video[0];
 
-							function onTrackedVideoFrame(currentTime, duration) {
-
-								var percent = currentTime / duration;
-
-								// update current time
-								$current.text(formatTime(currentTime));
-								$duration.text(formatTime(duration));
-
-								// update progress bar
-								$progress.width((percent * 100) + '%');
-							}
-
-
-							/*  --------------------------------------------------------
-								Scrubber/Progress Bar
-								-------------------------------------------------------- */
-							var timeDrag = false; // check for drag event
-
-							$scrubber.on('mousedown', function (e) {
-								e.stopPropagation();
-								timeDrag = true;
-								updateScrubber(e.pageX);
-							});
-
-							$(document).on('mouseup', function (e) {
-								e.stopPropagation();
-								if (timeDrag) {
-									timeDrag = false;
-									updateScrubber(e.pageX);
-								}
-							});
-
-							$(document).on('mousemove', function (e) {
-								e.stopPropagation();
-								if (timeDrag) {
-									updateScrubber(e.pageX);
-								}
-							});
-
-							function updateScrubber(x) {
-
-								var maxduration = $video[0].duration,
-									position = x - $scrubber.offset().left,
-									percent = 100 * position / $scrubber.width();
-
-								if (percent > 100) {
-									percent = 100;
-								}
-								if (percent < 0) {
-									percent = 0;
-								}
-
-								// update progress bar
-								$progress.width((percent) + '%');
-
-								// update video time to reflect change
-								$video[0].currentTime = maxduration * percent / 100;
-							}
+                            if (video.paused) {
+                                app.playButton.toggle('click');
+                                video.play();
+                                $this.addClass('pause');
+                            } else {
+                                app.playButton.toggle('click');
+                                video.pause();
+                                $this.removeClass('pause');
+                            }
+                        });
 
 
-							/*  --------------------------------------------------------
-								Helper Functions
-								-------------------------------------------------------- */
-							function formatTime(seconds) {
+                        /*  --------------------------------------------------------
+                        	Update Time
+                        	-------------------------------------------------------- */
+                        $video.on('timeupdate', function() {
+                            onTrackedVideoFrame(this.currentTime, this.duration);
+                        });
 
-								var minutes = Math.floor(seconds / 60);
-								seconds = Math.floor(seconds % 60);
+                        function onTrackedVideoFrame(currentTime, duration) {
 
-								seconds = (seconds >= 10) ? seconds : '0' + seconds;
-								minutes = (minutes >= 10) ? minutes : minutes;
+                            var percent = currentTime / duration;
 
-								return minutes + ':' + seconds;
-							}
+                            // update current time
+                            $current.text(formatTime(currentTime));
+                            $duration.text(formatTime(duration));
 
-							// maybe trigger share buttons when complete?
-							$video.bind('ended', function () {
-								// do cool shizz here
-							});
+                            // update progress bar
+                            $progress.width((percent * 100) + '%');
+                        }
 
-						};
 
-						$('.video-player').html5video();
+                        /*  --------------------------------------------------------
+                        	Scrubber/Progress Bar
+                        	-------------------------------------------------------- */
+                        var timeDrag = false; // check for drag event
 
-						var el = document.querySelectorAll('.si-icons-default > .si-icon-play')[0];
-						app.playButton = new svgIcon(el, svgIconConfig);
-					}
-				});
-			})();
-	</script>
+                        $scrubber.on('mousedown', function(e) {
+                            e.stopPropagation();
+                            timeDrag = true;
+                            updateScrubber(e.pageX);
+                        });
+
+                        $(document).on('mouseup', function(e) {
+                            e.stopPropagation();
+                            if (timeDrag) {
+                                timeDrag = false;
+                                updateScrubber(e.pageX);
+                            }
+                        });
+
+                        $(document).on('mousemove', function(e) {
+                            e.stopPropagation();
+                            if (timeDrag) {
+                                updateScrubber(e.pageX);
+                            }
+                        });
+
+                        function updateScrubber(x) {
+
+                            var maxduration = $video[0].duration,
+                                position = x - $scrubber.offset().left,
+                                percent = 100 * position / $scrubber.width();
+
+                            if (percent > 100) {
+                                percent = 100;
+                            }
+                            if (percent < 0) {
+                                percent = 0;
+                            }
+
+                            // update progress bar
+                            $progress.width((percent) + '%');
+
+                            // update video time to reflect change
+                            $video[0].currentTime = maxduration * percent / 100;
+                        }
+
+
+                        /*  --------------------------------------------------------
+                        	Helper Functions
+                        	-------------------------------------------------------- */
+                        function formatTime(seconds) {
+
+                            var minutes = Math.floor(seconds / 60);
+                            seconds = Math.floor(seconds % 60);
+
+                            seconds = (seconds >= 10) ? seconds : '0' + seconds;
+                            minutes = (minutes >= 10) ? minutes : minutes;
+
+                            return minutes + ':' + seconds;
+                        }
+
+                        // maybe trigger share buttons when complete?
+                        $video.bind('ended', function() {
+                            // do cool shizz here
+                        });
+
+                    };
+
+                    $('.video-player').html5video();
+
+                    var el = document.querySelectorAll('.si-icons-default > .si-icon-play')[0];
+                    app.playButton = new svgIcon(el, svgIconConfig);
+                }
+            });
+        })();
+    </script>
 
 </dom-module>
