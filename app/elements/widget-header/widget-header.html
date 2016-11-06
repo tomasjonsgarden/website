@@ -11,7 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="widget-header">
 
-	<template>
+    <template>
 		<style include='shared-styles'></style>
 		<style>
 			:host {
@@ -139,7 +139,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		</header>
 		<nav>
 			<a href="/commercial">Commercial</a>
-			<a href="/narrative">Narrative</a>
+			<a href="/fiction">Fiction</a>
 			<a href="/photography">Photography</a>
 		</nav>
 		<nav>
@@ -149,22 +149,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 	</template>
 
-	<script>
-		Polymer({
-			is: 'widget-header',
-			handleClick: function(e){
-				e.stopPropagation();
-				var that = this;
-				$(this).toggleClass('is-active');
-				$('body').on('click', function(){
-					e.stopPropagation(e);
-					app.menuButton.toggle('click');
-					$(that).removeClass('is-active');
-					$(this).off('click');
-				});
-				return false;
-			}
-		});
-	</script>
+    <script>
+        Polymer({
+            is: 'widget-header',
+            handleClick: function(e) {
+                e.stopPropagation();
+                var that = this;
+                $(this).toggleClass('is-active');
+                $('body').on('click', function() {
+                    e.stopPropagation(e);
+                    app.menuButton.toggle('click');
+                    $(that).removeClass('is-active');
+                    $(this).off('click');
+                });
+                return false;
+            }
+        });
+    </script>
 
 </dom-module>

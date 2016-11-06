@@ -10,52 +10,52 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <script src="../bower_components/page/page.js"></script>
 <script>
-	window.addEventListener('WebComponentsReady', function() {
-		// We use Page.js for routing. This is a Micro
-		// client-side router inspired by the Express router
-		// More info: https://visionmedia.github.io/page.js/
+    window.addEventListener('WebComponentsReady', function() {
+        // We use Page.js for routing. This is a Micro
+        // client-side router inspired by the Express router
+        // More info: https://visionmedia.github.io/page.js/
 
-		// Middleware
-		function scrollToTop(ctx, next) {
-			app.scrollPageToTop();
-			next();
-		}
+        // Middleware
+        function scrollToTop(ctx, next) {
+            app.scrollPageToTop();
+            next();
+        }
 
-		function stateChange(ctx, next) {
-			$('a[href].is-selected').removeClass('is-selected');
-			$('a[href="'+window.location.origin+ctx.path+'"]').addClass('is-selected');
-			next();
-		}
+        function stateChange(ctx, next) {
+            $('a[href].is-selected').removeClass('is-selected');
+            $('a[href="' + window.location.origin + ctx.path + '"]').addClass('is-selected');
+            next();
+        }
 
-		// Routes
-		page('/', scrollToTop, stateChange, function() {
-			app.route = 'home';
-		});
+        // Routes
+        page('/', scrollToTop, stateChange, function() {
+            app.route = 'home';
+        });
 
-		page('/commercial', scrollToTop, stateChange, function() {
-			app.route = 'commercial';
-		});
+        page('/commercial', scrollToTop, stateChange, function() {
+            app.route = 'commercial';
+        });
 
-		page('/narrative', scrollToTop, stateChange, function() {
-			app.route = 'narrative';
-		});
+        page('/fiction', scrollToTop, stateChange, function() {
+            app.route = 'fiction';
+        });
 
-		page('/photography', scrollToTop, stateChange, function() {
-			app.route = 'photography';
-		});
+        page('/photography', scrollToTop, stateChange, function() {
+            app.route = 'photography';
+        });
 
-		page('/contact', scrollToTop, stateChange, function() {
-			app.route = 'contact';
-		});
+        page('/contact', scrollToTop, stateChange, function() {
+            app.route = 'contact';
+        });
 
-		page('/about', scrollToTop, stateChange, function() {
-			app.route = 'about';
-		});
+        page('/about', scrollToTop, stateChange, function() {
+            app.route = 'about';
+        });
 
-		// add #! before urls
-		page({
-			hashbang: true
-		});
+        // add #! before urls
+        page({
+            hashbang: true
+        });
 
-	});
+    });
 </script>
