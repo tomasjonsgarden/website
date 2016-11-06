@@ -11,7 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id="widget-slideshow">
 
-	<template>
+    <template>
 		<style include='shared-styles'></style>
 		<style>
 			:host {
@@ -154,104 +154,102 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 		<template is="dom-repeat" items="{{item}}">
 			<header>
-				<b>{{item.title}}</b>
+				<b>{{item.name}}</b>
 				<span>{{trim(item.description)}}</span>
 			</header>
 			<!--<hr>-->
-			<iron-image sizing="cover" preload fade src="{{computeImages(item.thumbnail_large)}}" on-click="clickHandler"></iron-image>
+			<iron-image sizing="cover" preload fade src="{{computeImages(item.pictures.sizes.4.link)}}" on-click="clickHandler"></iron-image>
 		</template>
 
-		<menu>
-			<template is="dom-repeat" items="{{computeCollection(data)}}">
+    <menu>
+        <template is="dom-repeat" items="{{computeCollection(data.data)}}">
 				<button on-click="select" class$="{{computeActiveState(index)}}"><span></span></button>
 			</template>
-		</menu>
-	</template>
+    </menu>
+    </template>
 
-	<script>
-		Polymer({
-			is: 'widget-slideshow',
-			properties: {
-				src: {
-						type: String,
-						notify: true,
-					},
-				items: {
-					type: Array,
-					notify: true,
-					value: [],
-					observer: 'ready'
-				},
-				item: {
-					type: Object,
-					notify: true,
-					value: [{
-						title: 'title',
-						tags: '',
-						uploadDate: '',
-						thumbnailLarge: ''
-					}]
-				}
-			},
-			computeImages: function(image) {
-        		return image.replace('_640','_2500');
-			},
-			computeActiveState: function(index) {
-				console.log(index);
-        		return index === 0 ? 'active' : '';
-			},
-			computeTags: function(tags) {
-				return tags.split(', ').splice(0, 1);
-			},
-			computeCollection: function(collection) {
-				// this.items = collection.splice(0, 3);
-				this.items = collection;
-				return this.items;
-			},
-			selectCollection: function(collection) {
-				return collection.splice(1, 1);
-			},
-			computeDate: function(date) {
-				return date.split('-')[0];
-			},
-			ready: function() {
-				console.log('ready');
-				this.item = [this.items[0]];
-			},
-			select: function(e) {
-				var model = e.model;
-				// e.target.classList.add('completed');
-				$(e.target).addClass('active').siblings().removeClass('active');
-				this.item = [model.item];
-			},
-			trim: function (desc) {
-				return desc.split('<')[0];
-			},
-			clickHandler: function (e) {
-				e.stopPropagation();
-				var lightBox = $('light-box');
-				lightBox.attr('video', e.model.get('item.id'));
-				lightBox.attr('video-title', e.model.get('item.title'));
-				lightBox.attr('video-description', this.trim(e.model.get('item.description')));
-				console.log(e.model.get('item.tags'));
-				if($.inArray('sd', e.model.get('item.tags').split(', ')) > -1) {
-					lightBox.attr('video-quality', 'sd');
-				} else {
-					lightBox.attr('video-quality', 'hd');
-				}
-				app.playButton.toggle('click');
-				lightBox.children('.dim-screen').on('mousedown', function () {
-					e.stopPropagation();
-					lightBox.removeAttr('video video-title video-description video-date video-quality');
-					// lightBox.removeAttr('iron-image');
-					return false;
-					// app.playButton.toggle('click');
-				});
-				return false;
-			}
-		});
-
-
-	</script>
+    <script>
+        Polymer({
+            is: 'widget-slideshow',
+            properties: {
+                src: {
+                    type: String,
+                    notify: true,
+                },
+                items: {
+                    type: Array,
+                    notify: true,
+                    value: [],
+                    observer: 'ready'
+                },
+                item: {
+                    type: Object,
+                    notify: true,
+                    value: [{
+                        title: 'title',
+                        tags: '',
+                        uploadDate: '',
+                        thumbnailLarge: ''
+                    }]
+                }
+            },
+            computeImages: function(image) {
+                return image.replace('_640', '_2500');
+            },
+            computeActiveState: function(index) {
+                console.log(index);
+                return index === 0 ? 'active' : '';
+            },
+            computeTags: function(tags) {
+                return tags.split(', ').splice(0, 1);
+            },
+            computeCollection: function(collection) {
+                // this.items = collection.splice(0, 3);
+                this.items = collection;
+                return this.items;
+            },
+            selectCollection: function(collection) {
+                return collection.splice(1, 1);
+            },
+            computeDate: function(date) {
+                return date.split('-')[0];
+            },
+            ready: function() {
+                console.log('ready');
+                this.item = [this.items[0]];
+            },
+            select: function(e) {
+                var model = e.model;
+                // e.target.classList.add('completed');
+                $(e.target).addClass('active').siblings().removeClass('active');
+                this.item = [model.item];
+            },
+            trim: function(desc) {
+                return desc.split('<')[0];
+            },
+            clickHandler: function(e) {
+                e.stopPropagation();
+                var lightBox = $('light-box');
+                lightBox.attr('video', e.model.get('item.id'));
+                lightBox.attr('video-title', e.model.get('item.title'));
+                lightBox.attr('video-description', this.trim(e.model.get('item.description')));
+                console.log(e.model.get('item.tags'));
+                if ($.inArray('sd', e.model.get('item.tags').split(', ')) > -1) {
+                    lightBox.attr('video-quality', 'sd');
+                } else {
+                    lightBox.attr('video-quality', 'hd');
+                }
+                app.playButton.toggle('click');
+                lightBox.children('.dim-screen').on('mousedown', function() {
+                    e.stopPropagation();
+                    lightBox.removeAttr('video video-title video-description video-date video-quality');
+                    // lightBox.removeAttr('iron-image');
+                    return false;
+                    // app.playButton.toggle('click');
+                });
+                return false;
+            }
+        });
+    </script>
 
 </dom-module>
