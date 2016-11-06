@@ -10,7 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
 <dom-module id="widget-videos">
-	<template>
+    <template>
 		<style include='shared-styles'></style>
 		<style>
 			:host {
@@ -132,70 +132,63 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 		<!--<iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>-->
 		<iron-ajax url="{{src}}" last-response="{{data}}" auto></iron-ajax>
-		<template is="dom-repeat" items="{{data}}">
-			<div on-click="clickHandler">
+		<template is="dom-repeat" items="{{data.data}}">
+			<div on-click="clickHandler" url="{{item.files.4.link}}">
 				<p>
-					<span>{{item.title}}</span>
+					<span>{{item.name}}</span>
 					<span>{{trim(item.description)}}</span>
 				</p>
-				<iron-image sizing="cover" preload fade src="{{computeImages(item.thumbnail_large)}}"></iron-image>
+				<iron-image sizing="cover" preload fade src="{{computeImages(item.pictures.sizes)}}"></iron-image>
 			</div>
 		</template>
-	</template>
-	<script>
-		(function () {
-			'use strict';
-			Polymer({
-				is: 'widget-videos',
-				properties: {
-					src: {
-						type: String,
-						notify: true,
-					},
-					items: {
-						type: Array,
-						notify: true,
-					}
-				},
-				computeImages: function (image) {
-					return image.replace('_640', '_900');
-				},
-				trim: function (desc) {
-					return desc.split('<')[0];
-				},
-				computeTags: function (tags) {
-					return tags.split(', ').splice(0, 1);
-				},
-				computeDate: function (date) {
-					return date.split('-')[0];
-				},
-				ready: function () {
-					this.items = [];
-				},
-				clickHandler: function (e) {
-					e.stopPropagation();
-					var lightBox = $('light-box');
-					lightBox.attr('video', e.model.get('item.id'));
-					lightBox.attr('video-title', e.model.get('item.title'));
-					lightBox.attr('video-description', this.trim(e.model.get('item.description')));
-					console.log(e.model.get('item.tags'));
-					if($.inArray('sd', e.model.get('item.tags').split(', ')) > -1) {
-						lightBox.attr('video-quality', 'sd');
-					} else {
-						lightBox.attr('video-quality', 'hd');
-					}
-					app.playButton.toggle('click');
-					lightBox.children('.dim-screen').on('mousedown', function () {
-						e.stopPropagation();
-						lightBox.removeAttr('video video-title video-description video-date video-quality');
-						// lightBox.removeAttr('iron-image');
-						return false;
-						// app.playButton.toggle('click');
-					});
-					return false;
-				}
-			});
-		})();
-	</script>
+    </template>
+    <script>
+        (function() {
+            'use strict';
+            Polymer({
+                is: 'widget-videos',
+                properties: {
+                    src: {
+                        type: String,
+                        notify: true,
+                    },
+                    items: {
+                        type: Array,
+                        notify: true,
+                    }
+                },
+                computeImages: function(image) {
+                    return image[4].link;
+                },
+                trim: function(desc) {
+                    return desc.split('<')[0];
+                },
+                computeTags: function(tags) {
+                    return tags.split(', ').splice(0, 1);
+                },
+                computeDate: function(date) {
+                    return date.split('-')[0];
+                },
+                ready: function() {
+                    this.items = [];
+                },
+                clickHandler: function(e) {
+                    e.stopPropagation();
+                    var lightBox = $('light-box');
+                    console.log(e.model.get('item.files.2.link'));
+                    lightBox.attr('video', e.model.get('item.files.2.link'));
+                    app.playButton.toggle('click');
+                    lightBox.children('.dim-screen').on('mousedown', function() {
+                        e.stopPropagation();
+                        lightBox.removeAttr('video video-title video-description video-date video-quality');
+                        // lightBox.removeAttr('iron-image');
+                        return false;
+                        // app.playButton.toggle('click');
+                    });
+                    return false;
+                }
+            });
+        })();
+    </script>
 
 </dom-module>
