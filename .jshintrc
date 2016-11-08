@@ -20,7 +20,7 @@
 		"Platform": true,
 		"page": true,
 		"app": true,
-		"$": false,
+		"$": true,
 		"jQuery": false,
 		"svgIcon": false,
 		"svgIconConfig": false
