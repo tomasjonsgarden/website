@@ -65,3 +65,23 @@ Proper API call for public and private videos:
 Fiction: https://api.vimeo.com/me/albums/2329080/videos?per_page=50&sort=date&direction=desc&access_token=5329144dd1b697d05bbf580d3b10c6d3
 
 Commercials: https://api.vimeo.com/me/albums/2329074/videos?per_page=50&sort=date&direction=desc&access_token=5329144dd1b697d05bbf580d3b10c6d3
+
+
+
+
+
+Animated SVG Icons with Snap.svg
+=========
+
+Using SVGs on websites is becoming more and more easy with great libraries like Snap.svg. Today we want to explore what we can do with it and animate some SVG icons as a practical example.
+
+[Article on Codrops](http://tympanus.net/codrops/?p=16851)
+
+[Demo](http://tympanus.net/Tutorials/AnimatedSVGIcons/)
+
+Integrate or build upon it for free in your personal or commercial projects. Don't republish, redistribute or sell "as-is". 
+
+Read more here: [License](http://tympanus.net/codrops/licensing/)
+
+
+[© Codrops 2013](http://www.codrops.com)
