@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -7,81 +7,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="generator" content="Polymer Starter Kit" />
   <title>Tomas Jonsgården</title>
-  <!-- Place favicon.ico in the `app/` directory -->
-
-  <!-- Chrome for Android theme color -->
   <meta name="theme-color" content="#2E3AA1">
-
-  <!-- Web Application Manifest -->
   <link rel="manifest" href="manifest.json">
-
-  <!-- Tile color for Win8 -->
   <meta name="msapplication-TileColor" content="#3372DF">
-
-  <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="application-name" content="PSK">
   <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
-
-  <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
   <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
-
-  <!-- Tile icon for Win8 (144x144) -->
   <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-
-  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <!-- endbuild -->
-
-  <!-- build:js bower_components/jquery/dist/jquery.min.js -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <!-- endbuild -->
-
-  <!-- build:js bower_components/Snap.svg/dist/snap.svg-min.js -->
-  <script src="bower_components/Snap.svg/dist/snap.svg.js"></script>
-  <!-- endbuild -->
-
-  <!-- build:js vendors/svgicons.js -->
-  <script src="vendors/svgicons.js"></script>
-  <!-- endbuild -->
-
-  <!-- build:js vendors/svgicons-config.js -->
-  <script src="vendors/svgicons-config.js"></script>
-  <!-- endbuild -->
-
-  <!-- For shared styles, shared-styles.html import in elements.html -->
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/Snap.svg/dist/snap.svg-min.js"></script>
+  <script src="assets/vendors/svgicons.js"></script>
+  <script src="assets/vendors/svgicons-config.js"></script>
   <style is="custom-style" include="shared-styles"></style>
-
-  <!-- Google web fonts -->
   <script type="text/javascript">
-        WebFontConfig = {
-            google: {
-                families: ['Open+Sans:400,300,600,700,800:latin']
-            }
-        };
-        (function() {
-            var wf = document.createElement('script');
-            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-                '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-            wf.type = 'text/javascript';
-            wf.async = 'true';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(wf, s);
-        })();
-    </script>
-
-
+      WebFontConfig = {
+          google: {
+              families: ['Open+Sans:400,300,600,700,800:latin']
+          }
+      };
+      (function() {
+          var wf = document.createElement('script');
+          wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+              '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+          wf.type = 'text/javascript';
+          wf.async = 'true';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(wf, s);
+      })();
+  </script>
+  <script src="bower_components/page/page.js"></script>
   <link rel="import" href="bower_components/iron-icons/iron-icons.html">
   <link rel="import" href="bower_components/iron-pages/iron-pages.html">
   <link rel="import" href="bower_components/iron-selector/iron-selector.html">
   <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
   <link rel="import" href="bower_components/iron-menu-behavior/iron-menu-behavior.html">
-
-  <link rel="import" href="elements/iron-image.html">
-
   <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
   <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
   <link rel="import" href="bower_components/paper-item/paper-item.html">
@@ -91,11 +55,10 @@
   <link rel="import" href="bower_components/paper-toast/paper-toast.html">
   <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
   <link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
-
   <link rel="import" href="bower_components/paper-spinner/paper-spinner.html">
 
   <link rel="import" href="elements/routing.html">
-
+  <link rel="import" href="elements/iron-image.html">
   <link rel="import" href="elements/app-theme.html">
   <link rel="import" href="elements/shared-styles.html">
   <link rel="import" href="elements/light-box.html">
@@ -106,12 +69,8 @@
   <link rel="import" href="elements/widget-feature.html">
   <link rel="import" href="elements/widget-photos.html">
   <link rel="import" href="elements/widget-videos.html">
-
   <link rel="import" href="elements/play-svg-icon.html">
   <link rel="import" href="elements/component-svg-icon.html">
-
-
-
 </head>
 
 <body unresolved id="mainContainer">
@@ -120,6 +79,10 @@
     <style is="custom-style">
       :root {
         min-width: 320px;
+      }
+
+      h1, h3 {
+        font-weight: 300;
       }
 
       footer {
@@ -134,17 +97,9 @@
       }
 
       @media screen and (max-width: 640px) {
-        :root {
-          /*padding: 0 2rem 2rem 2rem;*/
-        }
         footer small {
           padding: .6rem;
         }
-      }
-
-      h1,
-      h3 {
-        font-weight: 300;
       }
     </style>
     <widget-header></widget-header>
@@ -274,6 +229,60 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 })(document);
 </script>
+
+<script>
+    window.addEventListener('WebComponentsReady', function() {
+        // We use Page.js for routing. This is a Micro
+        // client-side router inspired by the Express router
+        // More info: https://visionmedia.github.io/page.js/
+
+        // Middleware
+        function scrollToTop(ctx, next) {
+            app.scrollPageToTop();
+            next();
+        }
+
+        function stateChange(ctx, next) {
+            $('a[href].is-selected').removeClass('is-selected');
+            $('a[href="' + window.location.origin + ctx.path + '"]').addClass('is-selected');
+            next();
+        }
+
+        // Routes
+        page('/', scrollToTop, stateChange, function() {
+            app.route = 'home';
+        });
+
+        page('/commercial', scrollToTop, stateChange, function() {
+            app.route = 'commercial';
+        });
+
+        page('/fiction', scrollToTop, stateChange, function() {
+            app.route = 'fiction';
+        });
+
+        page('/photography', scrollToTop, stateChange, function() {
+            app.route = 'photography';
+        });
+
+        page('/contact', scrollToTop, stateChange, function() {
+            app.route = 'contact';
+        });
+
+        page('/about', scrollToTop, stateChange, function() {
+            app.route = 'about';
+        });
+
+        // add #! before urls
+        page({
+            hashbang: true
+        });
+
+    });
+</script>
+
+
+
 </body>
 
 </html>
