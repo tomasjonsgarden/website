@@ -1,6 +1,6 @@
 var svgIconConfig = {
 	clock : {
-		url : 'svg/clock.svg',
+		url : 'assets/svg/clock.svg',
 		animation : [
 			{
 				el : 'path:nth-child(2)',
@@ -19,7 +19,7 @@ var svgIconConfig = {
 		]
 	},
 	trash : {
-		url : 'svg/trash.svg',
+		url : 'assets/svg/trash.svg',
 		animation : [
 			{
 				el : 'path:nth-child(1)',
@@ -31,7 +31,7 @@ var svgIconConfig = {
 		]
 	},
 	contract : {
-		url : 'svg/contract.svg',
+		url : 'assets/svg/contract.svg',
 		animation : [
 			{
 				el : 'rect:nth-child(2)',
@@ -50,7 +50,7 @@ var svgIconConfig = {
 		]
 	},
 	maximize : {
-		url : 'svg/maximize.svg',
+		url : 'assets/svg/maximize.svg',
 		animation : [
 			{
 				el : 'path:nth-child(1)',
@@ -83,7 +83,7 @@ var svgIconConfig = {
 		]
 	},
 	maximizeRotate : {
-		url : 'svg/maximize.svg',
+		url : 'assets/svg/maximize.svg',
 		animation : [
 			{
 				el : 'path:nth-child(1)',
@@ -116,7 +116,7 @@ var svgIconConfig = {
 		]
 	},
 	volume : {
-		url : 'svg/volume.svg',
+		url : 'assets/svg/volume.svg',
 		animation : [
 			{
 				el : 'path:nth-child(1)',
@@ -142,7 +142,7 @@ var svgIconConfig = {
 		]
 	},
 	plus : {
-		url : 'svg/plus.svg',
+		url : 'assets/svg/plus.svg',
 		animation : [
 			{
 				el : 'path:nth-child(1)',
@@ -161,7 +161,7 @@ var svgIconConfig = {
 		]
 	},
 	plusCross : {
-		url : 'svg/plus.svg',
+		url : 'assets/svg/plus.svg',
 		animation : [
 			{
 				el : 'path:nth-child(1)',
@@ -180,7 +180,7 @@ var svgIconConfig = {
 		]
 	},
 	hamburger : {
-		url : 'svg/hamburger.svg',
+		url : 'assets/svg/hamburger.svg',
 		animation : [
 			{
 				el : 'path:nth-child(1)',
@@ -199,7 +199,7 @@ var svgIconConfig = {
 		]
 	},
 	hamburgerCross : {
-		url : 'svg/hamburger.svg',
+		url : 'assets/svg/hamburger.svg',
 		animation : [
 			{
 				el : 'path:nth-child(1)',
@@ -218,7 +218,7 @@ var svgIconConfig = {
 		]
 	},
 	navLeftArrow : {
-		url : 'svg/nav-left-arrow.svg',
+		url : 'assets/svg/nav-left-arrow.svg',
 		animation : [
 			{
 				el : 'path',
@@ -230,7 +230,7 @@ var svgIconConfig = {
 		]
 	},
 	navUpArrow : {
-		url : 'svg/nav-up-arrow.svg',
+		url : 'assets/svg/nav-up-arrow.svg',
 		animation : [
 			{
 				el : 'path',
@@ -242,7 +242,7 @@ var svgIconConfig = {
 		]
 	},
 	rightArrow : {
-		url : 'svg/right-arrow.svg',
+		url : 'assets/svg/right-arrow.svg',
 		animation : [
 			{
 				el : 'path',
@@ -254,7 +254,7 @@ var svgIconConfig = {
 		]
 	},
 	downArrow : {
-		url : 'svg/down-arrow.svg',
+		url : 'assets/svg/down-arrow.svg',
 		animation : [
 			{
 				el : 'path',
@@ -266,7 +266,7 @@ var svgIconConfig = {
 		]
 	},
 	smiley : {
-		url : 'svg/smiley.svg',
+		url : 'assets/svg/smiley.svg',
 		animation : [
 			{
 				el : 'path',
@@ -278,7 +278,7 @@ var svgIconConfig = {
 		]
 	},
 	play : {
-		url : 'svg/play.svg',
+		url : 'assets/svg/play.svg',
 		animation : [
 			{
 				el : 'path',
@@ -293,7 +293,7 @@ var svgIconConfig = {
 		]
 	},
 	mail : {
-		url : 'svg/mail.svg',
+		url : 'assets/svg/mail.svg',
 		animation : [
 			{
 				el : 'path',
@@ -305,7 +305,7 @@ var svgIconConfig = {
 		]
 	},
 	equalizer : {
-		url : 'svg/equalizer.svg',
+		url : 'assets/svg/equalizer.svg',
 		animation : [
 			{
 				el : 'path:nth-child(1)',
@@ -331,7 +331,7 @@ var svgIconConfig = {
 		]
 	},
 	glass : {
-		url : 'svg/glass.svg',
+		url : 'assets/svg/glass.svg',
 		animation : [
 			{
 				el : 'path',
@@ -343,7 +343,7 @@ var svgIconConfig = {
 		]
 	},
 	hourglass : {
-		url : 'svg/hourglass.svg',
+		url : 'assets/svg/hourglass.svg',
 		animation : [
 			{
 				el : 'path:nth-child(1)',
@@ -362,7 +362,7 @@ var svgIconConfig = {
 		]
 	},
 	padlock : {
-		url : 'svg/padlock.svg',
+		url : 'assets/svg/padlock.svg',
 		animation : [
 			{
 				el : 'path',
@@ -374,7 +374,7 @@ var svgIconConfig = {
 		]
 	},
 	zoom : {
-		url : 'svg/zoom.svg',
+		url : 'assets/svg/zoom.svg',
 		animation : [
 			{
 				el : 'path:nth-child(1)',
@@ -393,7 +393,7 @@ var svgIconConfig = {
 		]
 	},
 	monitor : {
-		url : 'svg/monitor.svg',
+		url : 'assets/svg/monitor.svg',
 		animation : [
 			{
 				el : 'path',
@@ -405,7 +405,7 @@ var svgIconConfig = {
 		]
 	},
 	flag : {
-		url : 'svg/flag.svg',
+		url : 'assets/svg/flag.svg',
 		animation : [
 			{
 				el : 'path',
