@@ -275,13 +275,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                             }
                         });
 
+                        function formatTime(seconds) {
 
-                        /*  --------------------------------------------------------
-                        	Update Time
-                        	-------------------------------------------------------- */
-                        $video.on('timeupdate', function() {
-                            onTrackedVideoFrame(this.currentTime, this.duration);
-                        });
+                            var minutes = Math.floor(seconds / 60);
+                            seconds = Math.floor(seconds % 60);
+
+                            seconds = (seconds >= 10) ? seconds : '0' + seconds;
+                            minutes = (minutes >= 10) ? minutes : minutes;
+
+                            return minutes + ':' + seconds;
+                        }
 
                         function onTrackedVideoFrame(currentTime, duration) {
 
@@ -294,8 +297,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                             // update progress bar
                             $progress.width((percent * 100) + '%');
                         }
+                        /*  --------------------------------------------------------
+                        	Update Time
+                        	-------------------------------------------------------- */
+                        $video.on('timeupdate', function() {
+                            onTrackedVideoFrame(this.currentTime, this.duration);
+                        });
 
 
+                        function updateScrubber(x) {
+
+                            var maxduration = $video[0].duration,
+                                position = x - $scrubber.offset().left,
+                                percent = 100 * position / $scrubber.width();
+
+                            if (percent > 100) {
+                                percent = 100;
+                            }
+                            if (percent < 0) {
+                                percent = 0;
+                            }
+
+                            // update progress bar
+                            $progress.width((percent) + '%');
+
+                            // update video time to reflect change
+                            $video[0].currentTime = maxduration * percent / 100;
+                        }
                         /*  --------------------------------------------------------
                         	Scrubber/Progress Bar
                         	-------------------------------------------------------- */
@@ -322,40 +350,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                             }
                         });
 
-                        function updateScrubber(x) {
 
-                            var maxduration = $video[0].duration,
-                                position = x - $scrubber.offset().left,
-                                percent = 100 * position / $scrubber.width();
-
-                            if (percent > 100) {
-                                percent = 100;
-                            }
-                            if (percent < 0) {
-                                percent = 0;
-                            }
-
-                            // update progress bar
-                            $progress.width((percent) + '%');
-
-                            // update video time to reflect change
-                            $video[0].currentTime = maxduration * percent / 100;
-                        }
 
 
                         /*  --------------------------------------------------------
                         	Helper Functions
                         	-------------------------------------------------------- */
-                        function formatTime(seconds) {
 
-                            var minutes = Math.floor(seconds / 60);
-                            seconds = Math.floor(seconds % 60);
-
-                            seconds = (seconds >= 10) ? seconds : '0' + seconds;
-                            minutes = (minutes >= 10) ? minutes : minutes;
-
-                            return minutes + ':' + seconds;
-                        }
 
                         // maybe trigger share buttons when complete?
                         $video.bind('ended', function() {
