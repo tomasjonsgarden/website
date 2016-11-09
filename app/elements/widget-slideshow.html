@@ -230,15 +230,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             clickHandler: function(e) {
                 e.stopPropagation();
                 var lightBox = $('light-box');
-                lightBox.attr('video', e.model.get('item.id'));
+                lightBox.attr('video', e.model.get('item.files.2.link'));
                 lightBox.attr('video-title', e.model.get('item.title'));
                 lightBox.attr('video-description', this.trim(e.model.get('item.description')));
                 console.log(e.model.get('item.tags'));
-                if ($.inArray('sd', e.model.get('item.tags').split(', ')) > -1) {
-                    lightBox.attr('video-quality', 'sd');
-                } else {
-                    lightBox.attr('video-quality', 'hd');
-                }
+                // if ($.inArray('sd', e.model.get('item.tags').split(', ')) > -1) {
+                //     lightBox.attr('video-quality', 'sd');
+                // } else {
+                //     lightBox.attr('video-quality', 'hd');
+                // }
                 app.playButton.toggle('click');
                 lightBox.children('.dim-screen').on('mousedown', function() {
                     e.stopPropagation();
