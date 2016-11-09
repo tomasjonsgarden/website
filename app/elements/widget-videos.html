@@ -178,7 +178,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     var lightBox = $('light-box');
                     console.log(e.model.get('item.files.2.link'));
                     lightBox.attr('video', e.model.get('item.files.2.link'));
-                    lightBox.attr('video-title', e.model.get('item.title'));
+                    lightBox.attr('video-title', e.model.get('item.name'));
                     lightBox.attr('video-description', this.trim(e.model.get('item.description')));
 
                     app.playButton.toggle('click');
