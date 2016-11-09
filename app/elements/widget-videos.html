@@ -10,140 +10,140 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../../assets/libs/polymer/polymer.html">
 
 <dom-module id="widget-videos">
-    <template>
-		<style include='shared-styles'></style>
-		<style>
-			:host {
-				@apply(--layout-horizontal);
-				@apply(--layout-wrap);
-				box-sizing: border-box;
-				padding-top: 0;
-				padding-bottom: 2.4rem;
-				font-size: var(--medium-size);
-			}
+  <template>
+    <style include='shared-styles'></style>
+    <style>
+      :host {
+        @apply(--layout-horizontal);
+        @apply(--layout-wrap);
+        box-sizing: border-box;
+        padding-top: 0;
+        padding-bottom: 2.4rem;
+        font-size: var(--medium-size);
+      }
 
-			:host:first-child {
-				padding-bottom: 0;
-			}
+      :host:first-child {
+        padding-bottom: 0;
+      }
 
-			div {
-				flex-basis: calc(100%/3);
+      div {
+        flex-basis: calc(100%/3);
         max-width: calc(100%/3);
-				color: grey;
-				background-color: black;
-				box-sizing: border-box;
-				display: flex;
-				flex-direction: column;
-				align-items: left;
-				padding: 0 1.2rem 0 1.2rem;
-			}
+        color: grey;
+        background-color: black;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        padding: 0 1.2rem 0 1.2rem;
+      }
 
-			div p {
-				cursor: pointer;
-				font-size: 1.8rem;
-				display: flex;
-				flex-direction: row;
-				width: calc(100% - 20px);
-				box-sizing: border-box;
-			}
+      div p {
+        cursor: pointer;
+        font-size: 1.8rem;
+        display: flex;
+        flex-direction: row;
+        width: calc(100% - 20px);
+        box-sizing: border-box;
+      }
 
-			span:not(:first-child):not(:empty):before {
-				content: '|';
-				margin-right: 10px;
-				margin-left: 10px;
-			}
+      span:not(:first-child):not(:empty):before {
+        content: '|';
+        margin-right: 10px;
+        margin-left: 10px;
+      }
 
-			span {
-				font-weight: 100;
-			}
+      span {
+        font-weight: 100;
+      }
 
-			span {
-				white-space: nowrap;
-				overflow: hidden;
-				text-overflow: ellipsis;
-			}
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-			span:first-child {
-				color: white;
-				/*font-style: italic;*/
-				font-weight: 600;
-				white-space: nowrap;
-				overflow: hidden;
-				text-overflow: ellipsis;
-			}
+      span:first-child {
+        color: white;
+        /*font-style: italic;*/
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-			:host iron-image {
-				width: 100%;
-				background-size: 140% !important;
-				background-color: black;
-				cursor: pointer;
-				transition: opacity .3s ease-in-out;
-			}
+      :host iron-image {
+        width: 100%;
+        background-size: 140% !important;
+        background-color: black;
+        cursor: pointer;
+        transition: opacity .3s ease-in-out;
+      }
 
-			iron-image:before {
-				content: "";
-				display: block;
-				margin-top: calc(100%*var(--aspect-ratio));
-			}
+      iron-image:before {
+        content: "";
+        display: block;
+        margin-top: calc(100%*var(--aspect-ratio));
+      }
 
-			div:hover iron-image {
-				opacity: .7;
-			}
+      div:hover iron-image {
+        opacity: .7;
+      }
 
-			@media screen and (max-width: 768px) {
-				div {
-					flex-basis: calc(100%/2);
-					color: grey;
-					background-color: black;
-					box-sizing: border-box;
-					display: flex;
-					flex-direction: column;
-					/*padding: 0 1.2rem 0 1.2rem;*/
-				}
-				/*div:nth-child(2n+1) {
+      @media screen and (max-width: 768px) {
+        div {
+          flex-basis: calc(100%/2);
+          color: grey;
+          background-color: black;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          /*padding: 0 1.2rem 0 1.2rem;*/
+        }
+        /*div:nth-child(2n+1) {
 					padding-left: 0;
 				}
 				div:nth-child(2n) {
 					padding-right: 0;
 				}*/
-			}
+      }
 
-			@media screen and (max-width: 640px) {
-				div {
-					padding: 0 .6rem 0 .6rem;
-				}
-				div p {
-					margin-top: 1.2rem;
-					margin-bottom: 1.2rem;
-				}
-			}
+      @media screen and (max-width: 640px) {
+        div {
+          padding: 0 .6rem 0 .6rem;
+        }
+        div p {
+          margin-top: 1.2rem;
+          margin-bottom: 1.2rem;
+        }
+      }
 
-			@media screen and (min-width: 0) and (max-width: 480px) {
-				div {
-					flex-basis: calc(100%);
-					color: grey;
-					background-color: black;
-					box-sizing: border-box;
-					display: flex;
-					flex-direction: column;
-					/*padding: 0;*/
-				}
-			}
-		</style>
+      @media screen and (min-width: 0) and (max-width: 480px) {
+        div {
+          flex-basis: calc(100%);
+          color: grey;
+          background-color: black;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          /*padding: 0;*/
+        }
+      }
+    </style>
 
-		<!--<iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>-->
-		<iron-ajax url="{{src}}" last-response="{{data}}" auto></iron-ajax>
-		<template is="dom-repeat" items="{{data.data}}">
-			<div on-click="clickHandler" url="{{item.files.4.link}}">
-				<p>
-					<span>{{item.name}}</span>
-					<span>{{trim(item.description)}}</span>
-				</p>
-				<iron-image sizing="cover" preload fade src="{{computeImages(item.pictures.sizes)}}"></iron-image>
-			</div>
-		</template>
+    <!--<iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>-->
+    <iron-ajax url="{{src}}" last-response="{{data}}" auto></iron-ajax>
+    <template is="dom-repeat" items="{{data.data}}">
+      <div on-click="clickHandler" url="{{item.files.4.link}}">
+        <p>
+          <span>{{item.name}}</span>
+          <span>{{trim(item.description)}}</span>
+        </p>
+        <iron-image sizing="cover" preload fade src="{{computeImages(item.pictures.sizes)}}"></iron-image>
+      </div>
     </template>
-    <script>
+  </template>
+  <script>
         (function() {
             'use strict';
             Polymer({
@@ -178,6 +178,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     var lightBox = $('light-box');
                     console.log(e.model.get('item.files.2.link'));
                     lightBox.attr('video', e.model.get('item.files.2.link'));
+                    lightBox.attr('video-title', e.model.get('item.title'));
+                    lightBox.attr('video-description', this.trim(e.model.get('item.description')));
+
                     app.playButton.toggle('click');
                     lightBox.children('.dim-screen').on('mousedown', function() {
                         e.stopPropagation();
