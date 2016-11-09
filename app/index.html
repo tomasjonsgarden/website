@@ -18,9 +18,9 @@
   <meta name="apple-mobile-web-app-title" content="Polymer Starter Kit">
   <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
   <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/Snap.svg/dist/snap.svg-min.js"></script>
+  <script src="assets/libs/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+  <script src="assets/libs/Snap.svg/dist/snap.svg-min.js"></script>
   <script src="assets/vendors/svgicons.js"></script>
   <script src="assets/vendors/svgicons-config.js"></script>
   <style is="custom-style" include="shared-styles"></style>
@@ -40,24 +40,23 @@
           s.parentNode.insertBefore(wf, s);
       })();
   </script>
-  <script src="bower_components/page/page.js"></script>
-  <link rel="import" href="bower_components/iron-icons/iron-icons.html">
-  <link rel="import" href="bower_components/iron-pages/iron-pages.html">
-  <link rel="import" href="bower_components/iron-selector/iron-selector.html">
-  <link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
-  <link rel="import" href="bower_components/iron-menu-behavior/iron-menu-behavior.html">
-  <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html">
-  <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
-  <link rel="import" href="bower_components/paper-item/paper-item.html">
-  <link rel="import" href="bower_components/paper-material/paper-material.html">
-  <link rel="import" href="bower_components/paper-menu/paper-menu.html">
-  <link rel="import" href="bower_components/paper-styles/paper-styles-classes.html">
-  <link rel="import" href="bower_components/paper-toast/paper-toast.html">
-  <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
-  <link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
-  <link rel="import" href="bower_components/paper-spinner/paper-spinner.html">
+  <script src="assets/libs/page/page.js"></script>
+  <link rel="import" href="assets/libs/iron-icons/iron-icons.html">
+  <link rel="import" href="assets/libs/iron-pages/iron-pages.html">
+  <link rel="import" href="assets/libs/iron-selector/iron-selector.html">
+  <link rel="import" href="assets/libs/iron-ajax/iron-ajax.html">
+  <link rel="import" href="assets/libs/iron-menu-behavior/iron-menu-behavior.html">
+  <link rel="import" href="assets/libs/paper-drawer-panel/paper-drawer-panel.html">
+  <link rel="import" href="assets/libs/paper-icon-button/paper-icon-button.html">
+  <link rel="import" href="assets/libs/paper-item/paper-item.html">
+  <link rel="import" href="assets/libs/paper-material/paper-material.html">
+  <link rel="import" href="assets/libs/paper-menu/paper-menu.html">
+  <link rel="import" href="assets/libs/paper-styles/paper-styles-classes.html">
+  <link rel="import" href="assets/libs/paper-toast/paper-toast.html">
+  <link rel="import" href="assets/libs/paper-toolbar/paper-toolbar.html">
+  <link rel="import" href="assets/libs/paper-radio-group/paper-radio-group.html">
+  <link rel="import" href="assets/libs/paper-spinner/paper-spinner.html">
 
-  <link rel="import" href="elements/routing.html">
   <link rel="import" href="elements/iron-image.html">
   <link rel="import" href="elements/app-theme.html">
   <link rel="import" href="elements/shared-styles.html">
@@ -146,11 +145,6 @@
       <small>© Tomas Jonsgården</small>
     </footer>
 
-    <!-- Service Worker support (1/2) -->
-    <paper-toast id="caching-complete" duration="6000" text="Caching complete! This app will work offline."></paper-toast>
-    <platinum-sw-register auto-register clients-claim skip-waiting on-service-worker-installed="displayInstalledToast">
-      <platinum-sw-cache default-cache-strategy="fastest" cache-config-file="cache-config.json"></platinum-sw-cache>
-    </platinum-sw-register>
   </template>
 
   <script>
@@ -170,13 +164,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // and give it some initial binding values
   // Learn more about auto-binding templates at http://goo.gl/Dx1u2g
   var app = document.querySelector('#app');
-
-  app.displayInstalledToast = function() {
-    // Check to make sure caching is actually enabled—it won't be in the dev environment.
-    if (!document.querySelector('platinum-sw-cache').disabled) {
-      document.querySelector('#caching-complete').show();
-    }
-  };
 
   // Listen for template bound event to know when bindings
   // have resolved and content has been stamped to the page

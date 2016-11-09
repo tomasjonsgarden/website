@@ -4,6 +4,7 @@
     "files.exclude": {
         "**/node_modules": true,
         "**/bower_components": true,
+        "**/app/assets/libs": true,
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,

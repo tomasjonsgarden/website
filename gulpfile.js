@@ -241,9 +241,9 @@ gulp.task('clean', function (cb) {
 });
 
 // Watch files for changes & reload
-gulp.task('serve', ['styles', 'elements'], function () {
+gulp.task('serve', [], function () {
   browserSync({
-    port: 5000,
+    port: 8080,
     notify: false,
     logPrefix: 'PSK',
     snippetOptions: {
@@ -259,11 +259,8 @@ gulp.task('serve', ['styles', 'elements'], function () {
     //       will present a certificate warning in the browser.
     // https: true,
     server: {
-      baseDir: ['.tmp', 'app'],
-      middleware: [ historyApiFallback() ],
-      routes: {
-        '/bower_components': 'bower_components'
-      }
+      baseDir: ['app'],
+      middleware: [ historyApiFallback() ]
     }
   });
 
