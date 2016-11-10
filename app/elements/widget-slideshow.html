@@ -230,7 +230,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             clickHandler: function(e) {
                 e.stopPropagation();
                 var lightBox = $('light-box');
-                lightBox.attr('video', e.model.get('item.files.2.link'));
+                var files = e.model.get('item.files');
+                var FilteredFiles = files.filter(function(file){
+                  return (file.quality === 'sd' || file.quality === 'hd') && file.height === 720;
+                });
+                console.log('FilteredFiles:', FilteredFiles);
+                lightBox.attr('video', e.model.get('item.files.0.link'));
                 lightBox.attr('video-title', e.model.get('item.name'));
                 lightBox.attr('video-description', this.trim(e.model.get('item.description')));
                 console.log(e.model.get('item.tags'));
