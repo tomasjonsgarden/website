@@ -6,6 +6,6 @@
         "browser-sync": "^2.18.2"
     },
     "scripts": {
-        "start": "browser-sync start --open --server app"
+        "start": "browser-sync start --open --server"
     }
 }
