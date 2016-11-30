@@ -5,6 +5,16 @@ Browser sync command line manual
 
 
 
+Vimeo api
+
+https://developer.vimeo.com/api/playground/me/albums/2334700/videos
+
+GET https://api.vimeo.com/me/albums/2334700/videos?sort=manual HTTP/2
+
+sort=manual
+
+
+
 http://tympanus.net/Development/IconHoverEffects/#set-3
 http://tympanus.net/Development/CreativeLinkEffects/
 
