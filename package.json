@@ -1,11 +1,11 @@
 {
-    "name": "tomasjonsgarden-project",
+    "name": "tomasjonsgarden-portfolio",
     "version": "2.0.4",
     "private": true,
     "devDependencies": {
         "browser-sync": "^2.18.2"
     },
     "scripts": {
-        "start": "browser-sync start --open --server"
+        "start": "browser-sync start --server --port=8080 --open=external --no-notify --online --logLevel=debug --files=./**/*.*"
     }
 }
