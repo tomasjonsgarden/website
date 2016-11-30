@@ -6,6 +6,6 @@
         "browser-sync": "^2.18.2"
     },
     "scripts": {
-        "start": "browser-sync start --server --port=8080 --open=localhost:8080"
+        "start": "browser-sync start --server --port=8080 --open=external --no-notify --online --logLevel=debug --files=./**/*.*"
     }
 }
