@@ -5,11 +5,11 @@
     "files.exclude": {
         "**/bower_components": true,
         "**/node_modules": true,
-        "**/bin": false,
+        "**/bin": true,
         "**/.git": true,
         "**/.editorconfig": true,
         "**/.vscode": false,
-        "**/.bowerrc": false,
+        "**/.bowerrc": true,
         "**/.gitattributes": true,
         "**/.gitignore": true,
         "**/.gitkeep": false,
