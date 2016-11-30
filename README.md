@@ -1,4 +1,10 @@
 
+### Server & Browser Sync
+Browser sync command line manual
+[https://www.browsersync.io/docs/command-line](https://www.browsersync.io/docs/command-line)
+
+
+
 http://tympanus.net/Development/IconHoverEffects/#set-3
 http://tympanus.net/Development/CreativeLinkEffects/
 
@@ -79,7 +85,7 @@ Using SVGs on websites is becoming more and more easy with great libraries like 
 
 [Demo](http://tympanus.net/Tutorials/AnimatedSVGIcons/)
 
-Integrate or build upon it for free in your personal or commercial projects. Don't republish, redistribute or sell "as-is". 
+Integrate or build upon it for free in your personal or commercial projects. Don't republish, redistribute or sell "as-is".
 
 Read more here: [License](http://tympanus.net/codrops/licensing/)
 
