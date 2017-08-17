@@ -9,7 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 <link rel="import" href="../../assets/libs/polymer/polymer.html">
 
-<dom-module id="widget-about">
+<dom-module id="widget-bio">
 
 	<template>
 		<iron-ajax url="https://vimeo.com/api/v2/4487625/info.json" last-response="{{data}}" auto></iron-ajax>
@@ -67,7 +67,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			}
 		</style>
 		<!--<iron-image sizing="cover" preload fade src="{{data.portrait_huge}}"></iron-image>-->
-		<h2>About</h2>
+		<h2>Bio</h2>
 		<!--<p>{{data.bio}}</p>-->
 		<p>It’s not by coincidence that Tomas Jonsgarden’s life path has led him to filmmaking. Born into a family of Academia, Tomas
 			was raised to question and to wonder – it was the gift of this wondering mind that turned his interest from music to photography
@@ -99,7 +99,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 	<script>
 		Polymer({
-			is: 'widget-about',
+			is: 'widget-bio',
 
 		});
 	</script>
