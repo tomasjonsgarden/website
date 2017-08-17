@@ -130,7 +130,7 @@
           <widget-videos data-route="commercial" src="https://api.vimeo.com/me/albums/2329074/videos?sort=manual&per_page=50&access_token=5329144dd1b697d05bbf580d3b10c6d3"></widget-videos>
 
 
-        <widget-videos data-route="fiction" src="https://api.vimeo.com/me/albums/2329080/videos?sort=manual&per_page=50&access_token=5329144dd1b697d05bbf580d3b10c6d3"></widget-videos>
+        <widget-videos data-route="narrative" src="https://api.vimeo.com/me/albums/2329080/videos?sort=manual&per_page=50&access_token=5329144dd1b697d05bbf580d3b10c6d3"></widget-videos>
         <div data-route="photography">
           <widget-photos orientation="landscape" src="https://picasaweb.google.com/data/feed/base/user/115234932010059601425/albumid/6218961437089181137?alt=json&kind=photo"></widget-photos>
           <hr>
@@ -244,8 +244,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             app.route = 'commercial';
         });
 
-        page('/fiction', scrollToTop, stateChange, function() {
-            app.route = 'fiction';
+        page('/narrative', scrollToTop, stateChange, function() {
+            app.route = 'narrative';
         });
 
         page('/photography', scrollToTop, stateChange, function() {
