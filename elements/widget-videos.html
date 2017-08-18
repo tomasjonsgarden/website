@@ -13,16 +13,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <style include='shared-styles'></style>
     <style>
-       :host {
+      :host {
         @apply(--layout-horizontal);
         @apply(--layout-wrap);
         box-sizing: border-box;
-        padding-top: 1.2rem;
-        padding-bottom: 1.2rem;
+        padding-top: 0;
+        padding-bottom: 2.4rem;
         font-size: var(--medium-size);
       }
 
-       :host:first-child {
+      :host:first-child {
         padding-bottom: 0;
       }
 
@@ -33,40 +33,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         background-color: black;
         box-sizing: border-box;
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        padding: 1.2rem;
-        position: relative;
+        flex-direction: column;
+        align-items: left;
+        padding: 0 1.2rem 0 1.2rem;
       }
 
       div p {
-        position: absolute;
-        z-index: 1;
-        opacity: 0;
         cursor: pointer;
         font-size: 1.8rem;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        max-width: calc(100% - 20px);
-        padding: 1.2rem;
-        margin: 0;
-        /* width: calc(100% - 20px); */
+        flex-direction: row;
+        width: calc(100% - 20px);
         box-sizing: border-box;
-        
       }
 
-      div:hover p {
-        opacity: 1;
-      }
-
-      /* span:not(:first-child):not(:empty):before {
+      span:not(:first-child):not(:empty):before {
         content: '|';
         margin-right: 10px;
         margin-left: 10px;
-      } */
+      }
 
       span {
         font-weight: 100;
@@ -82,14 +67,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: white;
         /*font-style: italic;*/
         font-weight: 600;
-        /* white-space: nowrap;
+        white-space: nowrap;
         overflow: hidden;
-        text-overflow: ellipsis; */
-        /* flex-shrink: 0; */
-        /* max-width: 60%; */
+        text-overflow: ellipsis;
+        flex-shrink: 0;
+        max-width: 60%;
       }
 
-       :host iron-image {
+      :host iron-image {
         width: 100%;
         background-size: 140% !important;
         background-color: black;
@@ -104,7 +89,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
 
       div:hover iron-image {
-        opacity: .3;
+        opacity: .7;
       }
 
       @media screen and (max-width: 768px) {
@@ -116,17 +101,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           box-sizing: border-box;
           display: flex;
           flex-direction: column;
-          padding: .6rem;
+          /*padding: 0 1.2rem 0 1.2rem;*/
         }
+        /*div:nth-child(2n+1) {
+					padding-left: 0;
+				}
+				div:nth-child(2n) {
+					padding-right: 0;
+				}*/
       }
 
       @media screen and (max-width: 640px) {
         div {
-          padding: .6rem;
+          padding: 0 .6rem 0 .6rem;
         }
         div p {
-          /* margin-top: .6rem;
-          margin-bottom: .6rem; */
+          margin-top: 1.2rem;
+          margin-bottom: 1.2rem;
         }
       }
 
@@ -157,59 +148,59 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </template>
   </template>
   <script>
-    (function () {
-      'use strict';
-      Polymer({
-        is: 'widget-videos',
-        properties: {
-          src: {
-            type: String,
-            notify: true,
-          },
-          items: {
-            type: Array,
-            notify: true,
-          }
-        },
-        computeImages: function (image) {
-          return image[4].link;
-        },
-        trim: function (desc) {
-          return desc.split('<')[0];
-        },
-        computeTags: function (tags) {
-          return tags.split(', ').splice(0, 1);
-        },
-        computeDate: function (date) {
-          return date.split('-')[0];
-        },
-        ready: function () {
-          this.items = [];
-        },
-        clickHandler: function (e) {
-          e.stopPropagation();
-          var lightBox = $('light-box');
-          var files = e.model.get('item.files');
-          var FilteredFiles = files.filter(function (file) {
-            return (file.quality === 'sd' || file.quality === 'hd') && file.height == 720;
-          });
-          console.log('FilteredFiles:', FilteredFiles);
-          lightBox.attr('video', e.model.get('item.files.0.link'));
-          lightBox.attr('video-title', e.model.get('item.name'));
-          lightBox.attr('video-description', this.trim(e.model.get('item.description')));
+        (function() {
+            'use strict';
+            Polymer({
+                is: 'widget-videos',
+                properties: {
+                    src: {
+                        type: String,
+                        notify: true,
+                    },
+                    items: {
+                        type: Array,
+                        notify: true,
+                    }
+                },
+                computeImages: function(image) {
+                    return image[4].link;
+                },
+                trim: function(desc) {
+                    return desc.split('<')[0];
+                },
+                computeTags: function(tags) {
+                    return tags.split(', ').splice(0, 1);
+                },
+                computeDate: function(date) {
+                    return date.split('-')[0];
+                },
+                ready: function() {
+                    this.items = [];
+                },
+                clickHandler: function(e) {
+                    e.stopPropagation();
+                    var lightBox = $('light-box');
+                    var files = e.model.get('item.files');
+                    var FilteredFiles = files.filter(function(file){
+                      return (file.quality === 'sd' || file.quality === 'hd') && file.height == 720;
+                    });
+                    console.log('FilteredFiles:', FilteredFiles);
+                    lightBox.attr('video', e.model.get('item.files.0.link'));
+                    lightBox.attr('video-title', e.model.get('item.name'));
+                    lightBox.attr('video-description', this.trim(e.model.get('item.description')));
 
-          app.playButton.toggle('click');
-          lightBox.children('.dim-screen').on('mousedown', function () {
-            e.stopPropagation();
-            lightBox.removeAttr('video video-title video-description video-date video-quality');
-            // lightBox.removeAttr('iron-image');
-            return false;
-            // app.playButton.toggle('click');
-          });
-          return false;
-        }
-      });
-    })();
-  </script>
+                    app.playButton.toggle('click');
+                    lightBox.children('.dim-screen').on('mousedown', function() {
+                        e.stopPropagation();
+                        lightBox.removeAttr('video video-title video-description video-date video-quality');
+                        // lightBox.removeAttr('iron-image');
+                        return false;
+                        // app.playButton.toggle('click');
+                    });
+                    return false;
+                }
+            });
+        })();
+    </script>
 
 </dom-module>
