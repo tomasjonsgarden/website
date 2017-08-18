@@ -17,88 +17,70 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				@apply(--layout-horizontal);
 				@apply(--layout-wrap);
 				box-sizing: border-box;
-				padding-top: 1.2rem;
-				padding-bottom: 1.2rem;
+				padding-top: 0;
+				padding-bottom: 2.4rem;
 				font-size: var(--medium-size);
-			}
-
-			 :host:first-child {
-				padding-bottom: 0;
 			}
 
 			div {
 				flex-basis: calc(100%/3);
-				max-width: calc(100%/3);
 				color: grey;
 				background-color: black;
 				box-sizing: border-box;
 				display: flex;
-				flex-direction: row;
-				align-items: center;
-				justify-content: center;
-				padding: 1.2rem;
-				position: relative;
+				flex-direction: column;
+				align-items: left;
+				padding: 0 1.2rem 0 1.2rem;
 			}
 
-			 :host[orientation="portrait"] div {
+			:host[orientation="portrait"] div {
 				flex-basis: calc(100%/4);
 				color: grey;
 				background-color: black;
 				box-sizing: border-box;
 				display: flex;
 				flex-direction: column;
-				align-items: center;
+				align-items: left;
 				padding: 0 1.2rem 0 1.2rem;
 			}
 
 			div p {
-				position: absolute;
-				z-index: 1;
-				opacity: 0;
 				cursor: pointer;
 				font-size: 1.8rem;
 				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-				max-width: calc(100% - 20px);
-				padding: 1.2rem;
-				margin: 0;
-				/* width: calc(100% - 20px); */
-				box-sizing: border-box;
+				flex-direction: row;
 			}
 
-			div:hover p {
-				opacity: 1;
+			span:not(:first-child):not(:empty):before {
+				content: '|';
+				margin-right: 10px;
+				margin-left: 10px;
 			}
-			/* span:not(:first-child):not(:empty):before {
-        content: '|';
-        margin-right: 10px;
-        margin-left: 10px;
-      } */
 
 			span {
 				font-weight: 100;
 			}
 
-			span {
-				/* white-space: nowrap;
+			span:not(:last-child) {
+				white-space: nowrap;
 				overflow: hidden;
-				text-overflow: ellipsis; */
+				text-overflow: ellipsis;
+			}
+
+			div:nth-of-type(4) {
+				display: none;
 			}
 
 			span:first-child {
 				color: white;
 				/*font-style: italic;*/
 				font-weight: 600;
-				/* white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis; */
-				/* flex-shrink: 0; */
-				/* max-width: 60%; */
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 
-			 :host iron-image {
+			:host[orientation="landscape"] iron-image {
 				width: 100%;
 				background-size: 140% !important;
 				background-color: black;
@@ -106,13 +88,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				transition: opacity .3s ease-in-out;
 			}
 
-			iron-image:before {
+			:host[orientation="landscape"] iron-image:before {
 				content: "";
 				display: block;
 				margin-top: calc(100%*var(--aspect-ratio));
 			}
 
-			 :host[orientation="portrait"] iron-image {
+			:host[orientation="portrait"] iron-image {
 				width: 100%;
 				background-size: 100% !important;
 				background-color: black;
@@ -127,19 +109,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			}
 
 			div:hover iron-image {
-				opacity: .3;
+				opacity: .7;
 			}
 
 			@media screen and (max-width: 768px) {
 				div {
 					flex-basis: calc(100%/2);
-					max-width: calc(100%/2);
 					color: grey;
 					background-color: black;
 					box-sizing: border-box;
 					display: flex;
 					flex-direction: column;
-					padding: .6rem;
+					/*padding: 0 1.2rem 0 1.2rem;*/
 				}
 				:host[orientation="portrait"] div {
 					flex-basis: calc(100%/3);
@@ -148,31 +129,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					box-sizing: border-box;
 					display: flex;
 					flex-direction: column;
-					align-items: center;
+					align-items: left;
 					padding: 0 1.2rem 0 1.2rem;
 				}
-			
-			
-			
-			
-			
-			
+				/*div:nth-child(2n+1) {
+					padding-left: 0;
+				}
+				div:nth-child(2n) {
+					padding-right: 0;
+				}*/
 			}
 
 			@media screen and (max-width: 640px) {
 				div {
-					padding: .6rem;
+					padding: 0 .6rem 0 .6rem;
 				}
 				div p {
-					/* margin-top: .6rem;
-          margin-bottom: .6rem; */
+					margin-top: 1.2rem;
+					margin-bottom: 1.2rem;
 				}
 			}
 
 			@media screen and (min-width: 0) and (max-width: 480px) {
 				div {
-					flex-basis: calc(100%/2);
-					/* max-width: calc(100%/2); */
+					flex-basis: calc(100%);
 					color: grey;
 					background-color: black;
 					box-sizing: border-box;
@@ -187,7 +167,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					box-sizing: border-box;
 					display: flex;
 					flex-direction: column;
-					align-items: center;
+					align-items: left;
 					padding: 0 1.2rem 0 1.2rem;
 				}
 			}
@@ -238,10 +218,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 						return console.log(val);
 					};
 				},
-				_orientation: function (item) {
-					if (this.orientation && this.orientation === 'portrait') {
+				_orientation: function(item) {
+					if(this.orientation && this.orientation === 'portrait'){
 						return item && (item.media$group.media$content[0].width < item.media$group.media$content[0].height);
-					} else if (this.orientation && this.orientation === 'landscape') {
+					} else if (this.orientation && this.orientation === 'landscape'){
 						return item && (item.media$group.media$content[0].width >= item.media$group.media$content[0].height);
 					} else {
 						return item;
@@ -273,10 +253,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					var lightBox = $('light-box');
 					lightBox.attr('iron-image', e.model.get('item.title.$t'));
 					lightBox.attr('iron-image-title', e.model.get('item.title.$t'));
-					lightBox.attr('iron-image-src', e.model.get('item.media$group.media$thumbnail')[2].url.replace('288', '2500'));
+					lightBox.attr('iron-image-src', e.model.get('item.media$group.media$thumbnail')[2].url.replace('288','2500'));
 					lightBox.attr('iron-image-orientation', 'contain');
 					// this.orientation
-					if (this.orientation === 'landscape') {
+					if(this.orientation === 'landscape') {
 						lightBox.attr('iron-image-orientation', 'cover');
 					} else {
 						lightBox.attr('iron-image-orientation', 'contain');
@@ -293,7 +273,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					return false;
 				}
 			});
-		})();
+})();
 	</script>
 
 </dom-module>
