@@ -9,7 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 <link rel="import" href="../../assets/libs/polymer/polymer.html">
 
-<dom-module id="widget-bio">
+<dom-module id="widget-about">
 
 	<template>
 		<iron-ajax url="https://vimeo.com/api/v2/4487625/info.json" last-response="{{data}}" auto></iron-ajax>
@@ -67,8 +67,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			}
 		</style>
 		<!--<iron-image sizing="cover" preload fade src="{{data.portrait_huge}}"></iron-image>-->
-		<h2>Bio</h2>
-		<!--<p>{{data.bio}}</p>-->
+		<h2>About</h2>
+		<!--<p>{{data.about}}</p>-->
 		<p><b><i>“In all my work I’m trying to find those moments of humanity that make us connect emotionally with a story.”</i></b></p>
 		<p>Tomas Jonsgarden is an award-winning director with a background in music and still photography.</p>
 		<p>After graduating from Stockholm film school, Tomas began working as a director’s assistant at Pettersson Akerlund where he would rub shoulders with directors such as Jonas Akerlund; needless to say the influence was great. The desire to further grow his knowledge and aesthetic eye led to a job as a photographer’s assistant. After years as assistant Tomas began shooting advertising and editorial for hire.</p>
@@ -78,12 +78,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		<p>In 2010 Tomas wrote and directed his first short film “Want To See Something?”, based on a story by Raymond Carver. The film was highly appreciated at festivals such as Montreal, Warsaw, Foyle and Alcine. It honored the grand press award at Lille film festival in France.</p>
 		<p>Tomas’ body of work is constantly growing and he has worked with the world’s biggest brands including Volvo, Ikea, Netflix and HBO.</p>
 		<p>His films take on a beautiful style of cinematic storytelling always with a human story at its core. He has a way of making everyday moments epic by capturing the subtle twitches of humanity that makes us laugh, cry or blush when we recognize ourselves in them. It takes a great director to imitate those gestures for the screen and it is something that has earned him awards at shows like Cannes Lions, Epica, Eurobest and New York Festivals amongst others.</p>
-		<iron-image sizing="cover" preload fade src="/assets/images/bio.jpeg"></iron-image>
+		<iron-image sizing="cover" preload fade src="/assets/images/about.jpeg"></iron-image>
 	</template>
 
 	<script>
 		Polymer({
-			is: 'widget-bio',
+			is: 'widget-about',
 
 		});
 	</script>

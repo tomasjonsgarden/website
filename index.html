@@ -63,7 +63,7 @@
   <link rel="import" href="elements/light-box.html">
   <link rel="import" href="elements/widget-header.html">
   <link rel="import" href="elements/widget-slideshow.html">
-  <link rel="import" href="elements/widget-bio.html">
+  <link rel="import" href="elements/widget-about.html">
   <link rel="import" href="elements/widget-contact.html">
   <link rel="import" href="elements/widget-feature.html">
   <link rel="import" href="elements/widget-photos.html">
@@ -121,7 +121,7 @@
 					<h3>Tomas Jonsgården on Sterntag Film</h3>
 					<widget-videos src="https://vimeo.com/api/v2/album/2417751/videos.json"></widget-videos>-->
           <hr>
-          <widget-bio></widget-bio>
+          <widget-about></widget-about>
           <hr>
           <widget-contact></widget-contact>
         </section>
@@ -137,7 +137,7 @@
           <widget-photos orientation="portrait" src="https://picasaweb.google.com/data/feed/base/user/115234932010059601425/albumid/6218961437089181137?alt=json&kind=photo"></widget-photos>
         </div>
         <widget-contact data-route="contact"></widget-contact>
-        <widget-bio data-route="bio"></widget-bio>
+        <widget-about data-route="about"></widget-about>
       </iron-pages>
     </main>
     <hr>
@@ -256,8 +256,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             app.route = 'contact';
         });
 
-        page('/bio', scrollToTop, stateChange, function() {
-            app.route = 'bio';
+        page('/about', scrollToTop, stateChange, function() {
+            app.route = 'about';
         });
 
         // add #! before urls
