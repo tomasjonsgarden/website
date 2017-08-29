@@ -35,6 +35,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				padding: 2.4rem 0 2.4rem 0;
 				z-index: 1;
 				visibility: hidden;
+				left: 0;
+				right: 0;
+				margin: auto;
+				top: 0;
+				bottom: 0;
+				justify-content: center;
+				pointer-events: none;
 			}
 			/*i {
 				background-color: rgba(255, 0, 0, .8);
@@ -160,7 +167,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 		<template is="dom-repeat" items="{{item}}">
 			<header>
-				<b>{{item.name}}</b>				
+				<b>{{item.name}}</b>
 				<span>{{trim(item.description)}}</span>
 			</header>
 			<!--<hr>-->
