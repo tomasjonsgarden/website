@@ -75,7 +75,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			}
 
 			menu {
-				display: flex;
+				display: none;
 				align-items: center;
 				justify-content: center;
 				padding: 0;
@@ -175,7 +175,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 			<!--<hr>-->
 			<iron-image sizing="cover" preload fade src="{{computeImages(item.pictures.sizes.4.link)}}" on-click="clickHandler"></iron-image>
 		</template>
-
+        
 		<menu>
 			<template is="dom-repeat" items="{{computeCollection(data.data)}}">
 				<button on-click="select" class$="{{computeActiveState(index)}}"><span></span></button>
