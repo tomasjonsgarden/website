@@ -215,7 +215,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     preload
                     fade
                     src="{{ item.thumbnail }}"
-                    on-click="clickHandler"
+                    on-click="(clickHandler)"
                 ></iron-image>
             </div>
         </template>
@@ -266,9 +266,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     }
                 },
                 computeData: function(data) {
-                    return data.items.map(item => {
-						const { file, title } = item.fields;
-						const { url, details } = file
+                    const { items, includes } = data;
+                    if (items.length < 1) {
+                        return [];
+                    }
+                    const stills = items[0];
+                    const { Asset: assets } = includes;
+                    const { images } = stills.fields;
+                    return images.map(image => {
+                        const asset = assets.find(
+                            asset => asset.sys.id === image.sys.id
+                        );
+                        const item = { ...image.sys, ...asset.fields };
+
+                        const { file, title } = item;
+                        const { url, details } = file;
                         return {
                             original: item,
                             url: `${url}?w=2000&h=2000`,
@@ -287,18 +299,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     this.items = [];
                 },
                 clickHandler: function(e) {
-					e.stopPropagation();
-					const item = e.model.get("item")
+                    e.stopPropagation();
+                    const item = e.model.get("item");
                     var lightBox = $("light-box");
                     lightBox.attr("iron-image", item.title);
-                    lightBox.attr(
-                        "iron-image-title",
-                        item.title
-                    );
-                    lightBox.attr(
-                        "iron-image-src",
-                        item.url
-                    );
+                    lightBox.attr("iron-image-title", item.title);
+                    lightBox.attr("iron-image-src", item.url);
                     lightBox.attr("iron-image-orientation", "contain");
                     // this.orientation
                     if (this.orientation === "landscape") {
