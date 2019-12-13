@@ -222,7 +222,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <span>[[videoDescription]][[ironImageDescription]]</span>
               <template is="dom-repeat" class="style-scope widget-slideshow"></template>
             </div>
-            <div class="full-screen-button">
+            <div class="full-screen-button" style="display: none;">
               <img width="30px" height="20px" alt="Toggle fullscreen" src="../assets/svg/full-screen.svg"></img>
             </div>
           </header>
@@ -258,11 +258,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     }
                 },
                 computedSrc: function(video) {
-                    console.log(video);
+                    var $wrapper = $(this),
+                          $fullscreen = $('.full-screen-button', $wrapper);
                     if (video) {
+                        $fullscreen.show();
                         app.playButton.toggle('click');
                         return video;
                     } else {
+                        $fullscreen.hide();
                         app.playButton.toggle('click');
                         return false;
                     }
@@ -288,7 +291,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                         // show custom controls
                         $controls.show();
 
-
+                     
                         $fullscreen.on('mousedown', function(e) {
                           e.stopPropagation();
 
