@@ -190,6 +190,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     padding: 0 1.2rem 0 1.2rem;
                 }
             }
+
+            .thumbnail-iron-image {
+                background-size: cover !important;
+            }
         </style>
         <!--<iron-ajax url="data.json" last-response="{{data}}" auto></iron-ajax>-->
         <iron-ajax
@@ -211,9 +215,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 					<span>{{item.media$group.media$content.0.height}}</span>-->
                 </p>
                 <iron-image
-                    sizing="cover"
+                    class="thumbnail-iron-image"
                     preload
                     fade
+                    sizing="cover"
                     src="{{ item.thumbnail }}"
                     on-click="clickHandler"
                 ></iron-image>
