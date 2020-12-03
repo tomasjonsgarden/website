@@ -59,7 +59,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       iron-image:before {
         content: "";
         display: block;
-        margin-top: calc(100%*var(--aspect-ratio));
+        /* margin-top: calc(100%*var(--aspect-ratio)); */
       }
 
       .dim-screen {
@@ -211,6 +211,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				margin-right: 1.25rem;
 				margin-left: 1.25rem;
 			}
+
+      .iron-image-main {
+        background-color: transparent;
+      }
+
     </style>
 
     <div class="dim-screen">
@@ -228,7 +233,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           </header>
           <play-svg-icon on-click="handleClick"></play-svg-icon>
           <video allowfullscreen class="play-pause" src="[[computedSrc(video)]]" autoplay></video>
-          <iron-image sizing="{{ironImageOrientation}}" preload fade src="[[ironImageSrc]]"></iron-image>
+          <iron-image class="iron-image-main" sizing="contain" position="top" preload fade src="[[ironImageSrc]]" ></iron-image>
           <div class="video-controls">
             <div class="video-scrubber">
               <div class="video-progress">

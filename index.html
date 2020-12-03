@@ -170,12 +170,12 @@
                     </section>
 
                     <widget-videos
-                        data-route="commercial"
+                        data-route="commercials"
                         src="https://api.vimeo.com/me/albums/2329074/videos?sort=manual&per_page=50&access_token=5329144dd1b697d05bbf580d3b10c6d3"
                     ></widget-videos>
 
                     <widget-videos
-                        data-route="narrative"
+                        data-route="fiction"
                         src="https://api.vimeo.com/me/albums/2329080/videos?sort=manual&per_page=50&access_token=5329144dd1b697d05bbf580d3b10c6d3"
                     ></widget-videos>
                     <div data-route="photography">
@@ -315,12 +315,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     app.route = "home";
                 });
 
-                page("/commercial", scrollToTop, stateChange, function() {
-                    app.route = "commercial";
+                page("/commercials", scrollToTop, stateChange, function() {
+                    app.route = "commercials";
                 });
 
-                page("/narrative", scrollToTop, stateChange, function() {
-                    app.route = "narrative";
+                page("/fiction", scrollToTop, stateChange, function() {
+                    app.route = "fiction";
                 });
 
                 page("/photography", scrollToTop, stateChange, function() {
