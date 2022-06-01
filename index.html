@@ -174,7 +174,7 @@
                         data-route="commercials"
                         src="https://api.vimeo.com/me/albums/2329074/videos?sort=manual&per_page=100&access_token=5329144dd1b697d05bbf580d3b10c6d3"
                     ></widget-videos>
-                    <section data-route="drama">
+                    <section data-route="films">
                         <widget-poster></widget-poster>
                         <widget-videos
                             src="https://api.vimeo.com/me/albums/2329080/videos?sort=manual&per_page=100&access_token=5329144dd1b697d05bbf580d3b10c6d3"
@@ -321,8 +321,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     app.route = "commercials";
                 });
 
-                page("/drama", scrollToTop, stateChange, function() {
-                    app.route = "drama";
+                page("/films", scrollToTop, stateChange, function() {
+                    app.route = "films";
                 });
 
                 page("/photography", scrollToTop, stateChange, function() {
