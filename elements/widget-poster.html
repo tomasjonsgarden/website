@@ -1,0 +1,84 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../assets/libs/polymer/polymer.html">
+
+<dom-module id="widget-poster">
+
+	<template>
+		<iron-ajax url="https://vimeo.com/api/v2/4487625/info.json" last-response="{{data}}" auto></iron-ajax>
+		<style include='shared-styles'></style>
+		<style>
+			:host {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				box-sizing: border-box;
+				padding: 2.4rem 1.2rem 2.4rem 1.2rem;
+			}
+
+			/*p {
+				color: var(--darker-color);
+				font-size: var(--medium-size);
+				font-weight: 200;
+				padding-right: 2rem;
+				margin: 0;
+				margin-bottom: 2rem;
+			}
+
+			h2 {
+				color: var(--darkest-color);
+				font-weight: 400;
+				text-transform: uppercase;
+				font-size: var(--larger-size);
+				margin: 0;
+				margin-bottom: 2rem;
+				padding-right: 2rem;
+			}*/
+
+			iron-image {
+				width: 100%;
+				background-color: black;
+			}
+
+			iron-image:before {
+				content: "";
+				display: block;
+				margin-top: 100%;
+			}
+
+			h2 {
+				font-weight: 300;
+				margin: 0;
+			}
+
+			@media screen and (max-width: 640px) {
+				:host {
+					display: block;
+					-webkit-column-count: 1;
+					-moz-column-count: 1;
+					column-count: 1;
+				}
+				:host {
+					padding: 1.2rem .6rem 1.2rem .6rem;
+				}
+			}
+		</style>
+		<iron-image sizing="contain" preload fade src="/assets/images/kasper_sophie.jpg"></iron-image>
+		<p><b>Kasper and Sophie</b> is a provocative story of love and betrayal in the midst of adolescent mental illness. This single shot film raises the question of how far one is willing to go for the sake of love culminating in a terrible deed.</p>
+	</template>
+
+	<script>
+		Polymer({
+			is: 'widget-poster',
+
+		});
+	</script>
+
+</dom-module>

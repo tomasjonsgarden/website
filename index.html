@@ -106,6 +106,7 @@
         <link rel="import" href="elements/widget-videos.html" />
         <link rel="import" href="elements/play-svg-icon.html" />
         <link rel="import" href="elements/component-svg-icon.html" />
+        <link rel="import" href="elements/widget-poster.html" />
     </head>
 
     <body unresolved id="mainContainer">
@@ -173,11 +174,12 @@
                         data-route="commercials"
                         src="https://api.vimeo.com/me/albums/2329074/videos?sort=manual&per_page=100&access_token=5329144dd1b697d05bbf580d3b10c6d3"
                     ></widget-videos>
-
-                    <widget-videos
-                        data-route="fiction"
-                        src="https://api.vimeo.com/me/albums/2329080/videos?sort=manual&per_page=100&access_token=5329144dd1b697d05bbf580d3b10c6d3"
-                    ></widget-videos>
+                    <section data-route="films">
+                        <widget-poster></widget-poster>
+                        <widget-videos
+                            src="https://api.vimeo.com/me/albums/2329080/videos?sort=manual&per_page=100&access_token=5329144dd1b697d05bbf580d3b10c6d3"
+                        />
+                    </section>
                     <div data-route="photography">
                         <widget-photos
                             orientation="landscape"
@@ -319,8 +321,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     app.route = "commercials";
                 });
 
-                page("/fiction", scrollToTop, stateChange, function() {
-                    app.route = "fiction";
+                page("/films", scrollToTop, stateChange, function() {
+                    app.route = "films";
                 });
 
                 page("/photography", scrollToTop, stateChange, function() {
