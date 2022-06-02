@@ -240,7 +240,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 				this.item = [model.item];
 			},
 			trim: function (desc) {
-				return desc.split('<')[0];
+				return desc ? desc.split('<')[0] : "";
 			},
 			clickHandler: function (e) {
 				e.stopPropagation();

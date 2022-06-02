@@ -181,7 +181,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           return image[4].link;
         },
         trim: function (desc) {
-          return desc.split('<')[0];
+          return desc ? desc.split('<')[0] : "";
         },
         computeTags: function (tags) {
           return tags.split(', ').splice(0, 1);
