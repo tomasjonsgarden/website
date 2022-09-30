@@ -102,6 +102,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         box-sizing: border-box;
       }
 
+      .video-player-wrapper {
+        position: relative;
+      }
+
       .video-controls {
         position: absolute;
         padding: 0;
@@ -231,12 +235,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               <img width="30px" height="20px" alt="Toggle fullscreen" src="../assets/svg/full-screen.svg"></img>
             </div>
           </header>
-          <play-svg-icon on-click="handleClick"></play-svg-icon>
-          <video allowfullscreen class="play-pause" src="[[computedSrc(video)]]" autoplay></video>
-          <iron-image class="iron-image-main" sizing="contain" position="top" preload fade src="[[ironImageSrc]]" ></iron-image>
-          <div class="video-controls">
-            <div class="video-scrubber">
-              <div class="video-progress">
+          <div class="video-player-wrapper">
+            <play-svg-icon on-click="handleClick"></play-svg-icon>
+            <video allowfullscreen class="play-pause" src="[[computedSrc(video)]]" autoplay></video>
+            <iron-image class="iron-image-main" sizing="contain" position="top" preload fade src="[[ironImageSrc]]" ></iron-image>
+            <div class="video-controls">
+              <div class="video-scrubber">
+                <div class="video-progress">
+                </div>
               </div>
             </div>
           </div>
